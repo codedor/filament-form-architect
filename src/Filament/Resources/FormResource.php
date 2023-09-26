@@ -3,8 +3,6 @@
 namespace Codedor\FormArchitect\Filament\Resources;
 
 use Codedor\FilamentArchitect\Filament\Fields\ArchitectInput;
-use Codedor\FormArchitect\Architect\RadioButtonBlock;
-use Codedor\FormArchitect\Architect\TextInputBlock;
 use Codedor\FormArchitect\Facades\BlockCollection;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
