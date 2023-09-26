@@ -29,6 +29,10 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'default-blocks' => [
+        \Codedor\FormArchitect\Architect\RadioButtonBlock::class,
+        \Codedor\FormArchitect\Architect\TextInputBlock::class,
+    ],
 ];
 ```
 
@@ -36,13 +40,6 @@ Optionally, you can publish the views using
 
 ```bash
 php artisan vendor:publish --tag="filament-form-architect-views"
-```
-
-## Usage
-
-```php
-$formArchitect = new Codedor\FormArchitect();
-echo $formArchitect->echoPhrase('Hello, Codedor!');
 ```
 
 ## Documentation
