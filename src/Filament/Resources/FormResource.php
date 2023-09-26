@@ -5,6 +5,7 @@ namespace Codedor\FormArchitect\Filament\Resources;
 use Codedor\FilamentArchitect\Filament\Fields\ArchitectInput;
 use Codedor\FormArchitect\Architect\RadioButtonBlock;
 use Codedor\FormArchitect\Architect\TextInputBlock;
+use Codedor\FormArchitect\Facades\BlockCollection;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -43,10 +44,7 @@ class FormResource extends Resource
                             ->helperText('0 is unlimited'),
 
                         ArchitectInput::make('fields')
-                            ->blocks([
-                                RadioButtonBlock::make()->toFilament(),
-                                TextInputBlock::make()->toFilament(),
-                            ]),
+                            ->blocks(BlockCollection::filamentBlocks()),
                     ])
                     ->translatableFields(fn (string $locale) => [
                         Forms\Components\TextInput::make('email_subject'),
