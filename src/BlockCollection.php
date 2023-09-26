@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
  * @template TKey of array-key
  * @template TValue of \Codedor\FilamentArchitect\Filament\Architect\BaseBlock
  *
- * @extends Collection<TKey, TValue>
+ * @extends \Codedor\FilamentArchitect\BlockCollection<TKey, TValue>
  */
 class BlockCollection extends \Codedor\FilamentArchitect\BlockCollection
 {

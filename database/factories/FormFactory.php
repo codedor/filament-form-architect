@@ -6,19 +6,11 @@ use Codedor\FilamentRedirects\Models\Redirect;
 use Codedor\FormArchitect\Models\Form;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<Form>
- */
 class FormFactory extends Factory
 {
     protected $model = Form::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    public function definition()
     {
         return [
             'name' => fake()->name(),
