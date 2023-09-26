@@ -3,7 +3,6 @@
 namespace Codedor\FormArchitect;
 
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 
 /**
  * @template TKey of array-key
