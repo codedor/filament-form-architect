@@ -2,7 +2,6 @@
 
 namespace Codedor\FormArchitect\Database\Factories;
 
-use Codedor\FilamentRedirects\Models\Redirect;
 use Codedor\FormArchitect\Models\Form;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

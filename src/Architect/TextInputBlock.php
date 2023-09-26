@@ -7,8 +7,6 @@ use Codedor\LocaleCollection\Facades\LocaleCollection;
 use Codedor\LocaleCollection\Locale;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
@@ -17,13 +15,12 @@ class TextInputBlock extends BaseBlock
 {
     public function schema(): array
     {
-        $labels = LocaleCollection::map(fn (Locale $locale) =>
-        Fieldset::make($locale->locale())
+        $labels = LocaleCollection::map(fn (Locale $locale) => Fieldset::make($locale->locale())
             ->schema([
                 TextInput::make("{$locale->locale()}.label")
-                    ->label("Label"),
+                    ->label('Label'),
                 TextInput::make("{$locale->locale()}.gdpr_notice")
-                    ->label("GDPR Notice"),
+                    ->label('GDPR Notice'),
             ])
         );
 
@@ -45,7 +42,7 @@ class TextInputBlock extends BaseBlock
                             Checkbox::make('is_required'),
                         ]),
                     Tabs\Tab::make('Content')
-                        ->schema($labels->toArray())
+                        ->schema($labels->toArray()),
                 ]),
         ];
     }
