@@ -1,0 +1,16 @@
+<?php
+
+namespace Codedor\FormArchitect\Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class FormSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        //
+    }
+}

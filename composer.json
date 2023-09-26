@@ -10,6 +10,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "codedor/filament-architect": "^0.4",
+        "codedor/laravel-locale-collection": "^0.0.3",
+        "filament/filament": "^3.0",
+        "guava/filament-drafts": "^2.1",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.12"
     },
@@ -20,6 +24,7 @@
         "orchestra/testbench": "^8.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
+        "pestphp/pest-plugin-livewire": "^2.1",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0"
@@ -50,5 +55,15 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/jyrkidn/filament-oembed.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/codedor/filament-resource-picker.git"
+        }
+    ]
 }
