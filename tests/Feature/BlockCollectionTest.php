@@ -3,7 +3,6 @@
 use Codedor\FormArchitect\Architect\RadioButtonBlock;
 use Codedor\FormArchitect\Architect\TextInputBlock;
 use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\TextInput;
 
 it('can fill collection from original config', function () {
     $collection = \Codedor\FormArchitect\Facades\BlockCollection::all();

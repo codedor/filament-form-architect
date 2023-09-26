@@ -28,7 +28,7 @@ class RadioButtonBlock extends BaseBlock
                                 ->options([
                                     'full' => 'Full',
                                     'half' => 'Half',
-                                ])
+                                ]),
                         ]),
                     Tabs\Tab::make('Content')
                         ->schema([
@@ -36,8 +36,8 @@ class RadioButtonBlock extends BaseBlock
                                 ->schema([
                                     TextInput::make('key'),
                                     ...$labels,
-                                ])
-                        ])
+                                ]),
+                        ]),
                 ]),
         ];
     }

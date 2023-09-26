@@ -1,8 +1,7 @@
 <?php
 
-use Codedor\FormArchitect\Tests\Fixtures\Models\User;
 use Codedor\FormArchitect\Filament\Resources\FormResource;
-use Codedor\FormArchitect\Models\Form;
+use Codedor\FormArchitect\Tests\Fixtures\Models\User;
 
 beforeEach(function () {
     $this->actingAs(User::factory()->create());
