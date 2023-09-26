@@ -5,6 +5,7 @@ namespace Codedor\FormArchitect\Tests;
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
 use Codedor\FormArchitect\Filament\FormArchitectPlugin;
+use Codedor\FormArchitect\Providers\FormArchitectServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\FilamentServiceProvider as BaseFilamentServiceProvider;
@@ -18,7 +19,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Oddvalue\LaravelDrafts\LaravelDraftsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Codedor\FormArchitect\Providers\FormArchitectServiceProvider;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 class TestCase extends Orchestra
