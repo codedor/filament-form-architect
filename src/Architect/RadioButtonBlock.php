@@ -12,6 +12,8 @@ use Filament\Forms\Components\TextInput;
 
 class RadioButtonBlock extends BaseBlock
 {
+    protected ?string $name = 'Radio buttons';
+
     public function schema(): array
     {
         $labels = LocaleCollection::map(

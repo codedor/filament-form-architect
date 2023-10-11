@@ -15,7 +15,8 @@ class FormArchitectServiceProvider extends PackageServiceProvider
             ->setBasePath(__DIR__ . '/../')
             ->hasConfigFile()
             ->hasMigration('create_forms_table')
-            ->runsMigrations();
+            ->runsMigrations()
+            ->hasViews();
     }
 
     public function registeringPackage(): void

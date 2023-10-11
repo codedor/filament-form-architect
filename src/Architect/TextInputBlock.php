@@ -3,46 +3,35 @@
 namespace Codedor\FormArchitect\Architect;
 
 use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
-use Codedor\LocaleCollection\Facades\LocaleCollection;
-use Codedor\LocaleCollection\Locale;
+use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 
 class TextInputBlock extends BaseBlock
 {
+    protected ?string $name = 'Text field';
+
     public function schema(): array
     {
-        $labels = LocaleCollection::map(fn (Locale $locale) => Fieldset::make($locale->locale())
-            ->schema([
-                TextInput::make("{$locale->locale()}.label")
-                    ->label('Label'),
-                TextInput::make("{$locale->locale()}.gdpr_notice")
-                    ->label('GDPR Notice'),
-            ])
-        );
-
         return [
-            Tabs::make()
-                ->tabs([
-                    Tabs\Tab::make('Settings')
-                        ->schema([
-                            Select::make('layout')
-                                ->options([
-                                    'full' => 'Full',
-                                    'half' => 'Half',
-                                ]),
-                            Select::make('type')
-                                ->options([
-                                    'text' => 'Text',
-                                    'number' => 'Number',
-                                ]),
-                            Checkbox::make('is_required'),
+            TranslatableTabs::make()
+                ->defaultFields([
+                    Select::make('type')
+                        ->options([
+                            'text' => 'Text',
+                            'number' => 'Number',
                         ]),
-                    Tabs\Tab::make('Content')
-                        ->schema($labels->toArray()),
+
+                    Checkbox::make('is_required'),
+                ])
+                ->translatableFields(fn () => [
+                    TextInput::make('label')
+                        ->required(),
+
+                    TextInput::make('gdpr_notice')
+                        ->label('GDPR Notice')
+                        ->helperText('This will explain why you need this information and how you will use it.'),
                 ]),
         ];
     }

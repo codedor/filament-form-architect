@@ -2,8 +2,9 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
-use Codedor\FilamentArchitect\Filament\Fields\ArchitectInput;
-use Codedor\FormArchitect\Facades\BlockCollection;
+use Codedor\FormArchitect\Architect\RadioButtonBlock;
+use Codedor\FormArchitect\Architect\TextInputBlock;
+use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -41,10 +42,13 @@ class FormResource extends Resource
                             ->default(0)
                             ->helperText('0 is unlimited'),
 
-                        ArchitectInput::make('fields')
-                            ->blocks(BlockCollection::filamentBlocks()),
+                        FormArchitectInput::make('fields')
+                            ->blocks([
+                                TextInputBlock::make(),
+                                RadioButtonBlock::make(),
+                            ]),
                     ])
-                    ->translatableFields(fn (string $locale) => [
+                    ->translatableFields(fn () => [
                         Forms\Components\TextInput::make('email_subject'),
 
                         TiptapEditor::make('email_body'),
@@ -62,20 +66,21 @@ class FormResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
+
                 Tables\Columns\TextColumn::make('max_submissions')
                     ->numeric()
                     ->sortable(),
-            ])
-            ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -85,13 +90,6 @@ class FormResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array
