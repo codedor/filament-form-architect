@@ -15,7 +15,7 @@
 
         <div
             x-sortable
-            x-on:end.stop="console.log('{{ $statePath }}', 'reorder', { items: $event.target.sortable.toArray() })"
+            x-on:end.stop="$wire.dispatch('{{ $statePath }}', 'reorder', { items: $event.target.sortable.toArray() })"
         >
             @foreach ($state ?? [] as $rowKey => $row)
                 <div

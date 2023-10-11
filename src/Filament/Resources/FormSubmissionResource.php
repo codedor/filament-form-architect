@@ -14,7 +14,7 @@ class FormSubmissionResource extends Resource
 {
     protected static ?string $model = \Codedor\FormArchitect\Models\FormSubmission::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-envelope-open';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function infolist(Infolist $infolist): Infolist
     {

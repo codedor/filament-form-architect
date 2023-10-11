@@ -61,16 +61,23 @@ class Form extends Model
     {
         return collect($this->fields)
             ->map(function ($row) {
-                return Row::make()->fields(
-                    collect($row)->map(function ($field, $uuid) {
+                $fields = collect($row)
+                    ->filter(fn ($field) => $field['data'][app()->getLocale()]['online'] ?? false)
+                    ->map(function ($field, $uuid) {
                         return $field['type']::toLivewireForm(
                             $uuid,
                             $field['data'] ?? [],
                             $field['data'][app()->getLocale()] ?? [],
                         );
-                    })
-                );
+                    });
+
+                if ($fields->isEmpty()) {
+                    return null;
+                }
+
+                return Row::make()->fields($fields);
             })
+            ->filter()
             ->toArray();
     }
 }

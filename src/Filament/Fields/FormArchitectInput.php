@@ -4,15 +4,11 @@ namespace Codedor\FormArchitect\Filament\Fields;
 
 use Closure;
 use Codedor\FormArchitect\Facades\BlockCollection;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Support\Enums\ActionSize;
 use Illuminate\Support\Str;
 
@@ -33,6 +29,20 @@ class FormArchitectInput extends Field
             fn (self $component): Action => $component->getAddBlockBetweenAction(),
             fn (self $component): Action => $component->getEditBlockAction(),
             fn (self $component): Action => $component->getDeleteBlockAction(),
+        ]);
+
+        $this->registerListeners([
+            'filament-form-architect::editedBlock' => [
+                function (self $component, string $statePath, array $arguments): void {
+                    if ($statePath !== $component->getStatePath()) {
+                        return;
+                    }
+
+                    $items = $component->getState();
+                    $items[$arguments['row']][$arguments['uuid']]['data'] = $arguments['form']['state'];
+                    $component->state($items);
+                },
+            ],
         ]);
     }
 
@@ -66,45 +76,15 @@ class FormArchitectInput extends Field
             ->color('gray')
             ->size(ActionSize::Small)
             ->closeModalByClickingAway(false)
-            // ->beforeFormValidated(fn (array $arguments) => session()->put('architect-modal-session', $arguments))
-            ->form(function () {
-                // $arguments = session()->get('architect-modal-session', []);
-
-                return [
-                    TextInput::make('working_title')
-                        ->helperText('This is purely to help you identify the block in the list of blocks.'),
-                    // ...$arguments['block']['type']::make()->schema(),
-                    TranslatableTabs::make()
-                        ->defaultFields([
-                            Select::make('type')
-                                ->selectablePlaceholder(false)
-                                ->options([
-                                    'text' => 'Text',
-                                    'number' => 'Number',
-                                ]),
-
-                            Toggle::make('is_required'),
-                        ])
-                        ->translatableFields(fn () => [
-                            TextInput::make('label')
-                                ->required(fn (Get $get) => $get('online')),
-
-                            TextInput::make('gdpr_notice')
-                                ->label('GDPR Notice')
-                                ->helperText('This will explain why you need this information and how you will use it.'),
-
-                            Toggle::make('online'),
-                        ]),
-                ];
-            })
-            ->mountUsing(function (Form $form, array $arguments) {
-                $form->fill($arguments['block']['data'] ?? null);
-            })
-            ->action(function (self $component, array $data, array $arguments) {
-                $items = $component->getState();
-                $items[$arguments['row']][$arguments['uuid']]['data'] = $data;
-                $component->state($items);
-            });
+            ->modalSubmitAction(false)
+            ->modalCancelAction(false)
+            ->modalContent(static fn (self $component, array $arguments) => view(
+                'filament-form-architect::edit-modal',
+                [
+                    'arguments' => $arguments,
+                    'statePath' => $component->getStatePath(),
+                ]
+            ));
     }
 
     public function getBaseAddBlockAction(string $name): Action

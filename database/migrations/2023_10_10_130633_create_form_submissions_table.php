@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('form_id')->nullable()->constrained()->nullOnDelete();
             $table->string('locale')->nullable();
+            $table->json('data')->nullable();
             $table->json('fields')->nullable();
             $table->timestamps();
         });

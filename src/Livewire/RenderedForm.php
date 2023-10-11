@@ -33,7 +33,11 @@ class RenderedForm extends FormController
         $this->savedModel = $this->modelClass::create([
             'form_id' => $this->formModel->id,
             'locale' => app()->getLocale(),
-            'fields' => $fields,
+            'fields' => $this->formModel->fields,
+            'data' => collect($fields)->map(fn ($value, $key) => [
+                'key' => $key,
+                'value' => $value,
+            ])->values(),
         ]);
     }
 

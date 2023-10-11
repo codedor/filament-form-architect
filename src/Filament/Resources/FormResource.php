@@ -5,8 +5,11 @@ namespace Codedor\FormArchitect\Filament\Resources;
 use Codedor\FormArchitect\Architect\RadioButtonBlock;
 use Codedor\FormArchitect\Architect\TextInputBlock;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
+use Codedor\FormArchitect\Models\Form as ModelsForm;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -87,7 +90,11 @@ class FormResource extends Resource
                     ->getStateUsing(fn ($record) => $record->submissions()->count()),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()->label('Submissions'),
+                Tables\Actions\Action::make('submissions')
+                    ->url(fn ($record): string => self::getUrl('submissions', [$record]))
+                    ->color('gray')
+                    ->icon('heroicon-s-eye'),
+
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
