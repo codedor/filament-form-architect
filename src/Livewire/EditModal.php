@@ -14,7 +14,9 @@ class EditModal extends Component implements HasForms
     use InteractsWithForms;
 
     public string $statePath;
+
     public array $state;
+
     public array $arguments;
 
     public function mount(array $arguments)
@@ -33,8 +35,8 @@ class EditModal extends Component implements HasForms
                     TextInput::make('working_title')
                         ->helperText('This is purely to help you identify the block in the list of blocks.'),
 
-                    ...(new $this->arguments['block']['type'])->schema()
-                ])
+                    ...(new $this->arguments['block']['type'])->schema(),
+                ]),
         ]);
     }
 
