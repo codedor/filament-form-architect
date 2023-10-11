@@ -13,7 +13,7 @@ class ListFormSubmissions extends ListRecords
 
     public Form $record;
 
-    public function mount(null|Form $record = null): void
+    public function mount(Form $record = null): void
     {
         parent::mount();
     }

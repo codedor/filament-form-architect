@@ -6,7 +6,6 @@ use Closure;
 use Codedor\FormArchitect\Facades\BlockCollection;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
