@@ -6,12 +6,10 @@ use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\LivewireForms\Fields\TextField;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
-use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
-use Filament\Infolists\Components\TextEntry;
 
 class TextInputBlock extends BaseBlock
 {
@@ -24,12 +22,6 @@ class TextInputBlock extends BaseBlock
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
             ->type($data['type'] ?? 'text');
-    }
-
-    public static function toInfolist(string $name, mixed $value)
-    {
-        return TextEntry::make($name)
-            ->getStateUsing(fn () => $value);
     }
 
     public function schema(): array

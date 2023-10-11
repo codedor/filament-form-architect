@@ -30,7 +30,7 @@ class Form extends Model
     ];
 
     public $casts = [
-        'fields' => 'array',
+        'fields' => 'json',
     ];
 
     protected static function newFactory()
@@ -68,7 +68,7 @@ class Form extends Model
                             $uuid,
                             $field['data'] ?? [],
                             $field['data'][app()->getLocale()] ?? [],
-                        );
+                        )->width($field['width'] ?? 12);
                     });
 
                 if ($fields->isEmpty()) {

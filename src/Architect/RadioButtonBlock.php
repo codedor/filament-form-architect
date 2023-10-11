@@ -10,7 +10,6 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
-use Filament\Infolists\Components\TextEntry;
 
 class RadioButtonBlock extends BaseBlock
 {
@@ -27,12 +26,6 @@ class RadioButtonBlock extends BaseBlock
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
             ->options($options);
-    }
-
-    public static function toInfolist(string $name, mixed $value)
-    {
-        return TextEntry::make($name)
-            ->getStateUsing(fn () => $value);
     }
 
     public function schema(): array

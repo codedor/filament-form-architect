@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->integer('max_submissions')->default(0);
-            $table->json('fields')->nullable();
+            $table->longText('fields')->nullable();
             $table->json('email_subject')->nullable();
             $table->json('email_body')->nullable();
             $table->json('online')->nullable();

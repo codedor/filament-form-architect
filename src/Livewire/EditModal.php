@@ -33,9 +33,14 @@ class EditModal extends Component implements HasForms
                     TextInput::make('working_title')
                         ->helperText('This is purely to help you identify the block in the list of blocks.'),
 
-                    ...(new $this->arguments['block']['type'])->schema()
+                    ...(new $this->arguments['block']['type'])->schema(),
                 ])
         ]);
+    }
+
+    public function validates()
+    {
+        return $this->form->validate();
     }
 
     public function getFormData()

@@ -15,8 +15,8 @@ class FormSubmission extends Model
     ];
 
     public $casts = [
-        'data' => 'array',
-        'fields' => 'array',
+        'data' => 'json',
+        'fields' => 'json',
     ];
 
     public function form()
@@ -38,11 +38,11 @@ class FormSubmission extends Model
                 ?? $oldSchema[$field['key']]['data']['working_title']
                 ?? $field['key'];
 
-            if (class_exists($fieldClass)) {
+            if (class_exists($fieldClass) && method_exists($fieldClass, 'toInfolist')) {
                 return $fieldClass::toInfolist($name, $field['value']);
             }
 
-            return TextEntry::make($field['key'])->getStateUsing(fn () => $field['value']);
+            return TextEntry::make($name)->getStateUsing(fn () => $field['value']);
         })->toArray();
     }
 }

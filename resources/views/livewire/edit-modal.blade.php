@@ -1,17 +1,28 @@
-<div x-data>
+<div x-data="{
+    async submit () {
+        const validated = await $wire.validates()
+        if (! validated) {
+            return
+        }
+
+        this.$wire.$parent.dispatchFormEvent(
+            'filament-form-architect::editedBlock',
+            '{{ $statePath }}',
+            {
+                row: '{{ $arguments['row'] }}',
+                uuid: '{{ $arguments['uuid'] }}',
+                form: await $wire.getFormData(),
+            }
+        )
+
+        this.close()
+    }
+}">
     {{ $this->form }}
 
     <div class="fi-modal-footer w-full pt-6">
         <div class="fi-modal-footer-actions gap-3 flex flex-wrap items-center">
-            <x-filament::button x-on:click.prevent="$wire.$parent.dispatchFormEvent(
-                'filament-form-architect::editedBlock',
-                '{{ $statePath }}',
-                {
-                    row: '{{ $arguments['row'] }}',
-                    uuid: '{{ $arguments['uuid'] }}',
-                    form: await $wire.getFormData(),
-                }
-            ) && close()">
+            <x-filament::button x-on:click.prevent="submit">
                 Sumbit
             </x-filament::button>
 
