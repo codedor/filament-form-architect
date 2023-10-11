@@ -146,6 +146,7 @@ class FormArchitectInput extends Field
             if (empty($items)) {
                 $items = [[$newUuid => $newBlock]];
                 $component->state($items);
+
                 return;
             }
 
