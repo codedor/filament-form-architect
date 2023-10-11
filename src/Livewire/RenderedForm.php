@@ -15,9 +15,9 @@ class RenderedForm extends FormController
     public string $modelClass = FormSubmission::class;
 
     public function mount(
-        ?string $component = null,
-        ?string $formClass = null,
-        ?Form $form = null,
+        string $component = null,
+        string $formClass = null,
+        Form $form = null,
     ) {
         $this->formClass = 'dynamic';
         $this->formModel = $form;
@@ -48,7 +48,8 @@ class RenderedForm extends FormController
 
     public function getForm()
     {
-        return (new class($this->formModel) extends LivewireFormsForm {
+        return new class($this->formModel) extends LivewireFormsForm
+        {
             public function __construct(public Form $formModel)
             {
                 parent::__construct();
@@ -61,6 +62,6 @@ class RenderedForm extends FormController
                     Button::make(__('form.submit')),
                 ];
             }
-        });
+        };
     }
 }
