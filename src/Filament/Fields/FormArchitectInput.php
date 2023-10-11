@@ -18,7 +18,7 @@ class FormArchitectInput extends Field
 {
     protected string $view = 'filament-form-architect::architect-input';
 
-    public null | Closure | array $blocks = null;
+    public null|Closure|array $blocks = null;
 
     protected function setUp(): void
     {
@@ -180,7 +180,7 @@ class FormArchitectInput extends Field
         });
     }
 
-    public function blocks(null | Closure | array $blocks): static
+    public function blocks(null|Closure|array $blocks): static
     {
         $this->blocks = $blocks;
 
