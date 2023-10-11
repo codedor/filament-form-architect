@@ -31,4 +31,6 @@
             </x-filament::button>
         </div>
     </div>
+
+    <x-filament-actions::modals />
 </div>
