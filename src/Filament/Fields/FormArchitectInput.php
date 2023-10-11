@@ -10,7 +10,9 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Support\Enums\ActionSize;
 use Illuminate\Support\Str;
 
@@ -69,7 +71,8 @@ class FormArchitectInput extends Field
                 // $arguments = session()->get('architect-modal-session', []);
 
                 return [
-                    TextInput::make('working_title'),
+                    TextInput::make('working_title')
+                        ->helperText('This is purely to help you identify the block in the list of blocks.'),
                     // ...$arguments['block']['type']::make()->schema(),
                     TranslatableTabs::make()
                         ->defaultFields([
@@ -80,15 +83,17 @@ class FormArchitectInput extends Field
                                     'number' => 'Number',
                                 ]),
 
-                            Checkbox::make('is_required'),
+                            Toggle::make('is_required'),
                         ])
                         ->translatableFields(fn () => [
                             TextInput::make('label')
-                                ->required(),
+                                ->required(fn (Get $get) => $get('online')),
 
                             TextInput::make('gdpr_notice')
                                 ->label('GDPR Notice')
                                 ->helperText('This will explain why you need this information and how you will use it.'),
+
+                            Toggle::make('online'),
                         ]),
                 ];
             })

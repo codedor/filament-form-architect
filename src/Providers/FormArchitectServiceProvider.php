@@ -3,6 +3,8 @@
 namespace Codedor\FormArchitect\Providers;
 
 use Codedor\FormArchitect\BlockCollection;
+use Codedor\FormArchitect\Livewire\RenderedForm;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -14,7 +16,10 @@ class FormArchitectServiceProvider extends PackageServiceProvider
             ->name('filament-form-architect')
             ->setBasePath(__DIR__ . '/../')
             ->hasConfigFile()
-            ->hasMigration('create_forms_table')
+            ->hasMigrations([
+                '2023_10_10_130632_create_forms_table',
+                '2023_10_10_130633_create_form_submissions_table',
+            ])
             ->runsMigrations()
             ->hasViews();
     }
@@ -24,5 +29,10 @@ class FormArchitectServiceProvider extends PackageServiceProvider
         $this->app->bind(BlockCollection::class, function () {
             return (new BlockCollection())->fromConfig();
         });
+    }
+
+    public function bootingPackage()
+    {
+        Livewire::component('filament-form-architect-rendered-form', RenderedForm::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace Codedor\FormArchitect\Filament;
 
 use Codedor\FormArchitect\Filament\Resources\FormResource;
+use Codedor\FormArchitect\Filament\Resources\FormSubmissionResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
@@ -25,6 +26,7 @@ class FormArchitectPlugin implements Plugin
         if ($this->hasFormResource()) {
             $panel->resources([
                 FormResource::class,
+                FormSubmissionResource::class,
             ]);
         }
     }

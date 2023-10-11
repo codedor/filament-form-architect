@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('name');
             $table->string('email')->nullable();
             $table->integer('max_submissions')->default(0);
@@ -21,8 +20,7 @@ return new class extends Migration
             $table->json('email_subject')->nullable();
             $table->json('email_body')->nullable();
             $table->json('online')->nullable();
-
-            $table->drafts();
+            $table->timestamps();
         });
     }
 

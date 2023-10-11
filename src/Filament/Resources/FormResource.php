@@ -8,16 +8,16 @@ use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use FilamentTiptapEditor\TiptapEditor;
-use Guava\FilamentDrafts\Admin\Resources\Concerns\Draftable;
 
 class FormResource extends Resource
 {
-    use Draftable;
-
     protected static ?string $model = \Codedor\FormArchitect\Models\Form::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
@@ -53,7 +53,7 @@ class FormResource extends Resource
 
                         TiptapEditor::make('email_body'),
 
-                        Forms\Components\Checkbox::make('online'),
+                        Forms\Components\Toggle::make('online'),
                     ]),
             ]);
     }
@@ -81,8 +81,13 @@ class FormResource extends Resource
                 Tables\Columns\TextColumn::make('max_submissions')
                     ->numeric()
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('submissions')
+                    ->sortable()
+                    ->getStateUsing(fn ($record) => $record->submissions()->count()),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make()->label('Submissions'),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -92,12 +97,30 @@ class FormResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist->schema([
+            Section::make()->schema([
+                TextEntry::make('name')->label('Form'),
+
+                TextEntry::make('submissions_count')
+                    ->label('Amount of submissions')
+                    ->getStateUsing(fn ($record) => $record->submissions()->count()),
+
+                TextEntry::make('last_submission_at')
+                    ->label('Last submission received on')
+                    ->getStateUsing(fn ($record) => $record->submissions()->latest()->first()?->created_at),
+            ]),
+        ]);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListForms::route('/'),
             'create' => Pages\CreateForm::route('/create'),
             'edit' => Pages\EditForm::route('/{record}/edit'),
+            'submissions' => Pages\ListFormSubmissions::route('/{record}/submissions'),
         ];
     }
 }

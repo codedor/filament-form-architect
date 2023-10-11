@@ -3,14 +3,13 @@
 namespace Codedor\FormArchitect\Models;
 
 use Codedor\FormArchitect\Database\Factories\FormFactory;
-use Guava\FilamentDrafts\Concerns\HasDrafts;
+use Codedor\LivewireForms\Fields\Row;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Form extends Model
 {
-    use HasDrafts;
     use HasFactory;
     use HasTranslations;
 
@@ -37,5 +36,41 @@ class Form extends Model
     protected static function newFactory()
     {
         return new FormFactory;
+    }
+
+    public function submissions()
+    {
+        return $this->hasMany(FormSubmission::class);
+    }
+
+    public function render()
+    {
+        return view('filament-form-architect::form', [
+            'form' => $this,
+        ]);
+    }
+
+    public function renderFields()
+    {
+        return view('filament-form-architect::fields', [
+            'fields' => $this->getLivewireFormFields(),
+        ]);
+    }
+
+    public function getLivewireFormFields(): array
+    {
+        return collect($this->fields)
+            ->map(function ($row) {
+                return Row::make()->fields(
+                    collect($row)->map(function ($field, $uuid) {
+                        return $field['type']::toLivewireForm(
+                            $uuid,
+                            $field['data'] ?? [],
+                            $field['data'][app()->getLocale()] ?? [],
+                        );
+                    })
+                );
+            })
+            ->toArray();
     }
 }
