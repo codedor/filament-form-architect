@@ -5,12 +5,15 @@ namespace Codedor\FormArchitect\Architect;
 use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\LivewireForms\Fields\FileField;
+use Codedor\LivewireForms\Fields\MultiFileField;
 use Codedor\MediaLibrary\Models\Attachment;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
+use Illuminate\Support\Collection;
 
 class FileInputBlock extends BaseBlock
 {
@@ -18,7 +21,9 @@ class FileInputBlock extends BaseBlock
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
-        return FileField::make($uuid)
+        $class = ($data['multiple'] ?? false) ? MultiFileField::class : FileField::class;
+
+        return $class::make($uuid)
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
@@ -27,10 +32,9 @@ class FileInputBlock extends BaseBlock
 
     public static function toInfolist(string $name, mixed $value)
     {
-        $attachment = Attachment::find($value);
-
-        return TextEntry::make($name)->getStateUsing(
-            $attachment->url,
+        return ViewEntry::make($name)->view(
+            'filament-form-architect::components.infolists.file',
+            ['attachments' => Collection::wrap(Attachment::find($value))->filter()]
         );
     }
 

@@ -168,7 +168,7 @@ class FormArchitectInput extends Field
 
             $after = $arguments['insertAfter'] ?? null;
             $newBlock = $this->newBlock($data);
-            $newBlock['width'] = 6;
+            $newBlock['width'] = 12;
 
             // Insert between the current column and the next one
             if ($after) {
@@ -230,13 +230,12 @@ class FormArchitectInput extends Field
         foreach ($items as $key => $row) {
             $totalWidth = collect($row)->sum('width');
 
-            // Normalize the widths of all the fields back to a total of 12
-            if ($totalWidth !== 12) {
-                $items[$key] = collect($row)->map(function ($item) use ($totalWidth) {
-                    $item['width'] = round($item['width'] / $totalWidth * 12);
+            if ($totalWidth === 12) {
+                continue;
+            }
 
-                    return $item;
-                })->toArray();
+            foreach ($row as $uuid => $field) {
+                $items[$key][$uuid]['width'] = 12 / count($row);
             }
         }
 

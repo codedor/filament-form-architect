@@ -34,6 +34,7 @@ class TextInputBlock extends BaseBlock
                         ->selectablePlaceholder(false)
                         ->options([
                             'text' => 'Text',
+                            'email' => 'E-mail',
                             'number' => 'Number',
                         ]),
 

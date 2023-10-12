@@ -51,7 +51,6 @@ class FormResource extends Resource
                             ->blocks([
                                 TitleBlock::make(),
                                 TextInputBlock::make(),
-                                EmailInputBlock::make(),
                                 TextareaBlock::make(),
                                 RadioButtonBlock::make(),
                                 FileInputBlock::make(),
