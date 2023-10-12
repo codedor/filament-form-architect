@@ -4,23 +4,34 @@ namespace Codedor\FormArchitect\Architect;
 
 use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
-use Codedor\LivewireForms\Fields\TextField;
+use Codedor\LivewireForms\Fields\FileField;
+use Codedor\MediaLibrary\Models\Attachment;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use Filament\Infolists\Components\TextEntry;
 
-class EmailInputBlock extends BaseBlock
+class FileInputBlock extends BaseBlock
 {
-    protected ?string $name = 'Email field';
+    protected ?string $name = 'File upload field';
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
-        return TextField::make($uuid)
+        return FileField::make($uuid)
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
-            ->type('email');
+            ->disk('private');
+    }
+
+    public static function toInfolist(string $name, mixed $value)
+    {
+        $attachment = Attachment::find($value);
+
+        return TextEntry::make($name)->getStateUsing(
+            $attachment->url,
+        );
     }
 
     public function schema(): array
@@ -29,6 +40,9 @@ class EmailInputBlock extends BaseBlock
             TranslatableTabs::make()
                 ->persistInQueryString(false)
                 ->defaultFields([
+                    Toggle::make('multiple')
+                        ->helperText('Allow multiple files to be uploaded'),
+
                     Toggle::make('is_required'),
                 ])
                 ->translatableFields(fn () => [

@@ -16,12 +16,17 @@ class TextareaBlock extends BaseBlock
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
+        $max = $data['max'] ?? null;
+
         // TODO: what to do with max value??
         return TextareaField::make($uuid)
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
-            ->rules($data['is_required'] ? 'required' : null)
-            ->type('email');
+            ->rules([
+                $data['is_required'] ? 'required' : null,
+                $max ? "max:{$max}" : null,
+            ])
+            ->max($max ?? null);
     }
 
     public function schema(): array
@@ -43,6 +48,8 @@ class TextareaBlock extends BaseBlock
                     TextInput::make('gdpr_notice')
                         ->label('GDPR Notice')
                         ->helperText('This will explain why you need this information and how you will use it.'),
+
+                    Toggle::make('online'),
                 ]),
         ];
     }

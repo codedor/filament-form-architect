@@ -8,18 +8,17 @@ use Codedor\LivewireForms\Fields\Title;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 
-class TextBlock extends BaseBlock
+class TitleBlock extends BaseBlock
 {
-    protected ?string $name = 'Text component';
+    protected ?string $name = 'Title component';
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
         return Title::make($uuid)
             ->label($translated['label'])
-            ->required($data['is_required'] ?? false)
-            ->rules($data['is_required'] ? 'required' : null)
-            ->type($data['type'] ?? 'text');
+            ->styling($data['styling']);
     }
 
     public function schema(): array
@@ -41,6 +40,8 @@ class TextBlock extends BaseBlock
                 ->translatableFields(fn () => [
                     TextInput::make('label')
                         ->required(),
+
+                    Toggle::make('online'),
                 ]),
         ];
     }

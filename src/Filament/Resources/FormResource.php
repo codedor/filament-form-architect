@@ -3,10 +3,12 @@
 namespace Codedor\FormArchitect\Filament\Resources;
 
 use Codedor\FormArchitect\Architect\EmailInputBlock;
+use Codedor\FormArchitect\Architect\FileInputBlock;
 use Codedor\FormArchitect\Architect\RadioButtonBlock;
 use Codedor\FormArchitect\Architect\TextareaBlock;
 use Codedor\FormArchitect\Architect\TextBlock;
 use Codedor\FormArchitect\Architect\TextInputBlock;
+use Codedor\FormArchitect\Architect\TitleBlock;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
@@ -47,11 +49,12 @@ class FormResource extends Resource
 
                         FormArchitectInput::make('fields')
                             ->blocks([
-                                TextBlock::make(),
+                                TitleBlock::make(),
                                 TextInputBlock::make(),
                                 EmailInputBlock::make(),
                                 TextareaBlock::make(),
                                 RadioButtonBlock::make(),
+                                FileInputBlock::make(),
                             ]),
                     ])
                     ->translatableFields(fn () => [

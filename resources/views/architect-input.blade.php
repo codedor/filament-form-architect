@@ -5,7 +5,7 @@
 @endphp
 
 <x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-4">
         <div class="flex w-full justify-center">
             <x-filament-form-architect::icon-button
                 :action="$getAction('addBlock')"
@@ -25,7 +25,7 @@
                     class="w-full flex gap-2 bg-white p-2 items-center"
                     x-sortable-item="{{ $rowKey }}"
                 >
-                    <div class="grow flex flex-col gap-2">
+                    <div class="grow flex flex-col gap-4">
                         <div class="grow flex gap-2 items-center">
                             <div class="flex flex-col gap-2">
                                 <x-filament-form-architect::icon-button
@@ -55,79 +55,16 @@
                                 })"
                             >
                                 @foreach ($row as $uuid => $block)
-                                    <div
-                                        class="w-full flex gap-2 items-center"
-                                        style="grid-column: span {{ $block['width'] ?? 12 }};"
-                                        x-sortable-item="{{ $uuid }}"
-                                        :key="$uuid"
-                                    >
-                                        <div class="
-                                            relative grow bg-gray-50 p-4 rounded-lg
-                                            border justify-between flex gap-2
-                                            group
-                                        ">
-                                            <div class="flex flex-col text-sm">
-                                                <div class="flex gap-1">
-                                                    <strong>
-                                                        {{ $block['data']['working_title'] ?? 'New field' }}
-                                                    </strong>
-
-                                                    @foreach ($locales as $locale)
-                                                        <x-filament-form-architect::locale-indicator
-                                                            :online="$block['data'][$locale]['online'] ?? false"
-                                                            :locale="$locale"
-                                                        />
-                                                    @endforeach
-                                                </div>
-
-                                                <span class="text-xs">
-                                                    {{ $block['type']::make()->getName() }}
-                                                </span>
-                                            </div>
-
-                                            <div class="
-                                                absolute top-2 right-2 flex gap-1
-                                                opacity-0 group-hover:opacity-100
-                                            ">
-                                                @if (count($row) > 1)
-                                                    <x-filament::icon-button
-                                                        color="gray"
-                                                        icon="heroicon-o-arrows-right-left"
-                                                        class="border-2 bg-white"
-                                                        size="sm"
-                                                        icon-size="sm"
-                                                        x-sortable-handle
-                                                    />
-                                                @endif
-
-                                                <x-filament-form-architect::icon-button
-                                                    :action="$getAction('editBlock')"
-                                                    :state-path="$getStatePath()"
-                                                    :arguments="[
-                                                        'uuid' => $uuid,
-                                                        'row' => $rowKey,
-                                                        'block' => $block,
-                                                    ]"
-                                                />
-
-                                                <x-filament-form-architect::icon-button
-                                                    color="danger"
-                                                    :action="$getAction('deleteBlock')"
-                                                    :state-path="$getStatePath()"
-                                                    :arguments="[
-                                                        'uuid' => $uuid,
-                                                        'row' => $rowKey,
-                                                    ]"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <x-filament-form-architect::icon-button
-                                            :action="$getAction('addBlockBetween')"
-                                            :state-path="$getStatePath()"
-                                            :arguments="['row' => $rowKey, 'insertAfter' => $uuid]"
-                                        />
-                                    </div>
+                                    <x-filament-form-architect::input-row
+                                        :uuid="$uuid"
+                                        :row="$row"
+                                        :row-key="$rowKey"
+                                        :block="$block"
+                                        :locales="$locales"
+                                        :state-path="$statePath"
+                                        :get-action="$getAction"
+                                        :loop="$loop"
+                                    />
                                 @endforeach
                             </div>
                         </div>
