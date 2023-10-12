@@ -36,7 +36,7 @@ class TextareaBlock extends BaseBlock
                 ->persistInQueryString(false)
                 ->defaultFields([
                     TextInput::make('max')
-                        ->label('Max characters')
+                        ->label('Maximum allowed characters')
                         ->numeric(),
 
                     Toggle::make('is_required'),

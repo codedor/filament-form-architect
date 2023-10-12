@@ -9,6 +9,7 @@ use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Get;
 
 class TitleBlock extends BaseBlock
 {
@@ -18,7 +19,7 @@ class TitleBlock extends BaseBlock
     {
         return Title::make($uuid)
             ->label($translated['label'])
-            ->styling($data['styling']);
+            ->tag($data['styling'] ?? 'h2');
     }
 
     public function schema(): array
@@ -27,7 +28,8 @@ class TitleBlock extends BaseBlock
             TranslatableTabs::make()
                 ->persistInQueryString(false)
                 ->defaultFields([
-                    Select::make('styling')
+                    Select::make('tag')
+                        ->label('Styling')
                         ->selectablePlaceholder(false)
                         ->options([
                             'h2' => 'h2',
@@ -39,7 +41,7 @@ class TitleBlock extends BaseBlock
                 ])
                 ->translatableFields(fn () => [
                     TextInput::make('label')
-                        ->required(),
+                        ->required(fn (Get $get) => $get('online')),
 
                     Toggle::make('online'),
                 ]),
