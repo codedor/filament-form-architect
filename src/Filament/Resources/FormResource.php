@@ -2,7 +2,6 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
-use Codedor\FormArchitect\Architect\EmailInputBlock;
 use Codedor\FormArchitect\Architect\FileInputBlock;
 use Codedor\FormArchitect\Architect\RadioButtonBlock;
 use Codedor\FormArchitect\Architect\TextareaBlock;
