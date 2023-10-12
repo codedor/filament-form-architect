@@ -26,7 +26,12 @@ class FileInputBlock extends BaseBlock
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
-            ->disk('private');
+            ->disk('private')
+            ->validationMessages([
+                "files.{$uuid}.required" => __('validation.required', [
+                    'attribute' => $translated['label'],
+                ]),
+            ]);
     }
 
     public static function toInfolist(string $name, mixed $value)

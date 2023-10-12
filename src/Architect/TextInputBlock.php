@@ -21,7 +21,12 @@ class TextInputBlock extends BaseBlock
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
-            ->type($data['type'] ?? 'text');
+            ->type($data['type'] ?? 'text')
+            ->validationMessages([
+                "fields.{$uuid}.required" => __('validation.required', [
+                    'attribute' => $translated['label'],
+                ]),
+            ]);
     }
 
     public function schema(): array

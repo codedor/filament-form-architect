@@ -25,7 +25,12 @@ class RadioButtonBlock extends BaseBlock
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
-            ->options($options);
+            ->options($options)
+            ->validationMessages([
+                "fields.{$uuid}.required" => __('validation.required', [
+                    'attribute' => $translated['label'],
+                ]),
+            ]);
     }
 
     public function schema(): array

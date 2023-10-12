@@ -41,6 +41,7 @@ class FormSubmissionResource extends Resource
                 Tables\Columns\TextColumn::make('locale')
                     ->sortable(),
             ])
+            ->defaultSort('id', 'desc')
             ->actions([
                 Tables\Actions\ViewAction::make(),
             ])

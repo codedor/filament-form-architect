@@ -2,6 +2,7 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
+use Codedor\FormArchitect\Architect\CheckboxBlock;
 use Codedor\FormArchitect\Architect\FileInputBlock;
 use Codedor\FormArchitect\Architect\RadioButtonBlock;
 use Codedor\FormArchitect\Architect\TextareaBlock;
@@ -52,6 +53,7 @@ class FormResource extends Resource
                                 TextareaBlock::make(),
                                 RadioButtonBlock::make(),
                                 FileInputBlock::make(),
+                                CheckboxBlock::make(),
                             ]),
                     ])
                     ->translatableFields(fn () => [

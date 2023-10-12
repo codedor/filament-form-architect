@@ -3,32 +3,25 @@
 namespace Codedor\FormArchitect\Architect;
 
 use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
+use Codedor\LivewireForms\Fields\CheckboxField;
 use Codedor\LivewireForms\Fields\Field;
-use Codedor\LivewireForms\Fields\TextareaField;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 
-class TextareaBlock extends BaseBlock
+class CheckboxBlock extends BaseBlock
 {
-    protected ?string $name = 'Textarea field';
+    protected ?string $name = 'Checkbox';
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
-        $max = $data['max'] ?? null;
-
-        // TODO: what to do with max value??
-        return TextareaField::make($uuid)
+        return CheckboxField::make($uuid)
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
-            ->rules([
-                $data['is_required'] ? 'required' : null,
-                $max ? "max:{$max}" : null,
-            ])
-            ->max($max ?? null)
+            ->rules($data['is_required'] ? 'accepted' : null)
             ->validationMessages([
-                "fields.{$uuid}.required" => __('validation.required', [
+                "fields.{$uuid}.accepted" => __('validation.accepted', [
                     'attribute' => $translated['label'],
                 ]),
             ]);
@@ -40,10 +33,6 @@ class TextareaBlock extends BaseBlock
             TranslatableTabs::make()
                 ->persistInQueryString(false)
                 ->defaultFields([
-                    TextInput::make('max')
-                        ->label('Maximum allowed characters')
-                        ->numeric(),
-
                     Toggle::make('is_required'),
                 ])
                 ->translatableFields(fn () => [
