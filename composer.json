@@ -11,7 +11,7 @@
     "require": {
         "php": "^8.2",
         "codedor/filament-architect": "^0.4",
-        "codedor/laravel-locale-collection": "^0.0.3",
+        "codedor/laravel-locale-collection": "^0.0.4",
         "filament/filament": "^3.0",
         "guava/filament-drafts": "^2.1",
         "illuminate/contracts": "^10.0",
