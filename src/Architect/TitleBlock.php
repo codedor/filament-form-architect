@@ -2,14 +2,11 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use App\Filament\Tiptap\LinkAction;
-use App\Filament\Tiptap\MediaAction;
 use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\LivewireForms\Fields\Title;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use FilamentTiptapEditor\TiptapEditor;
