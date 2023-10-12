@@ -2,6 +2,8 @@
 
 namespace Codedor\FormArchitect\Architect;
 
+use App\Filament\Tiptap\LinkAction;
+use App\Filament\Tiptap\MediaAction;
 use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\LivewireForms\Fields\Title;
@@ -10,6 +12,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use FilamentTiptapEditor\TiptapEditor;
+use Illuminate\Support\HtmlString;
 
 class TitleBlock extends BaseBlock
 {
@@ -17,9 +21,15 @@ class TitleBlock extends BaseBlock
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
+
         return Title::make($uuid)
-            ->label($translated['label'])
-            ->tag($data['styling'] ?? 'h2');
+            ->label(new HtmlString(
+                parse_link_picker_json(
+                    $translated['label']
+                )
+            ))
+            ->tag($data['tag'] ?? 'h2')
+            ->headingClass($data['tag'] ?? 'h2');
     }
 
     public function schema(): array
@@ -40,7 +50,8 @@ class TitleBlock extends BaseBlock
                         ]),
                 ])
                 ->translatableFields(fn () => [
-                    TextInput::make('label')
+                    TiptapEditor::make('label')
+                        ->tools(['link'])
                         ->required(fn (Get $get) => $get('online')),
 
                     Toggle::make('online'),
