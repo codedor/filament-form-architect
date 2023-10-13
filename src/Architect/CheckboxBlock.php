@@ -8,6 +8,7 @@ use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use Illuminate\Support\HtmlString;
 
 class CheckboxBlock extends BaseFormBlock
 {
@@ -19,6 +20,7 @@ class CheckboxBlock extends BaseFormBlock
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'accepted' : null)
+            ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->validationMessages([
                 "fields.{$uuid}.accepted" => __('validation.accepted', [
                     'attribute' => $translated['label'],

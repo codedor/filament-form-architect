@@ -9,6 +9,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use FilamentTiptapEditor\TiptapEditor;
+use Illuminate\Support\HtmlString;
 
 class TextInputBlock extends BaseFormBlock
 {
@@ -20,6 +22,7 @@ class TextInputBlock extends BaseFormBlock
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
+            ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->type($data['type'] ?? 'text')
             ->validationMessages([
                 "fields.{$uuid}.required" => __('validation.required', [
@@ -48,7 +51,7 @@ class TextInputBlock extends BaseFormBlock
                     TextInput::make('label')
                         ->required(fn (Get $get) => $get('online')),
 
-                    TextInput::make('gdpr_notice')
+                    TiptapEditor::make('gdpr_notice')
                         ->label('GDPR Notice')
                         ->helperText('This will explain why you need this information and how you will use it.'),
 

@@ -8,6 +8,7 @@ use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use Illuminate\Support\HtmlString;
 
 class TextareaBlock extends BaseFormBlock
 {
@@ -25,9 +26,14 @@ class TextareaBlock extends BaseFormBlock
                 $max ? "max:{$max}" : null,
             ])
             ->max($max ?? null)
+            ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->validationMessages([
                 "fields.{$uuid}.required" => __('validation.required', [
                     'attribute' => $translated['label'],
+                ]),
+                "string" => __('validation.max', [
+                    'attribute' => $translated['label'],
+                    'max' => $max,
                 ]),
             ]);
     }

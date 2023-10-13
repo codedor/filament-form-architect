@@ -39,7 +39,8 @@ class FormResource extends Resource
                             ->required()
                             ->numeric()
                             ->default(0)
-                            ->helperText('0 is unlimited'),
+                            ->helperText('0 is unlimited')
+                            ->hidden(config('filament-form-architect.enable-submission-field') === false),
 
                         FormArchitectInput::make('fields')
                             ->blocks(BlockCollection::fromConfig()),

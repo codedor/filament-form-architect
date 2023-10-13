@@ -3,6 +3,7 @@
 use Codedor\FormArchitect\Architect;
 
 return [
+    'enable-submission-field' => false,
     'default-blocks' => [
         Architect\TitleBlock::class => [],
         Architect\TextInputBlock::class => [],

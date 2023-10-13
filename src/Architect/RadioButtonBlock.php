@@ -9,6 +9,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use Illuminate\Support\HtmlString;
 
 class RadioButtonBlock extends BaseFormBlock
 {
@@ -24,6 +25,7 @@ class RadioButtonBlock extends BaseFormBlock
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
+            ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->options($options)
             ->validationMessages([
                 "fields.{$uuid}.required" => __('validation.required', [

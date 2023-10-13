@@ -12,6 +12,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Infolists\Components\ViewEntry;
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 
 class FileInputBlock extends BaseFormBlock
 {
@@ -25,6 +26,7 @@ class FileInputBlock extends BaseFormBlock
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
+            ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->disk('private')
             ->validationMessages([
                 "files.{$uuid}.required" => __('validation.required', [

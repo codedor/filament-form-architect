@@ -18,11 +18,7 @@ class TitleBlock extends BaseFormBlock
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
         return Title::make($uuid)
-            ->label(new HtmlString(
-                parse_link_picker_json(
-                    $translated['label']
-                )
-            ))
+            ->label(new HtmlString($translated['label']))
             ->tag($data['tag'] ?? 'h2')
             ->headingClass($data['tag'] ?? 'h2');
     }
