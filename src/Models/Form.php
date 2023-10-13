@@ -82,7 +82,14 @@ class Form extends Model
                     return null;
                 }
 
-                return Row::make()->fields($fields);
+                $row = Row::make()->fields($fields);
+
+                $config = config('filament-form-architect.default-row-attributes', []);
+                foreach ($config as $key => $value) {
+                    $row->{$key}($value);
+                }
+
+                return $row;
             })
             ->filter()
             ->toArray();
