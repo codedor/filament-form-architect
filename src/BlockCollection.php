@@ -2,8 +2,6 @@
 
 namespace Codedor\FormArchitect;
 
-use Illuminate\Contracts\View\View;
-
 /**
  * @template TKey of array-key
  * @template TValue of \Codedor\FilamentArchitect\Filament\Architect\BaseBlock

@@ -2,12 +2,6 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
-use Codedor\FormArchitect\Architect\CheckboxBlock;
-use Codedor\FormArchitect\Architect\FileInputBlock;
-use Codedor\FormArchitect\Architect\RadioButtonBlock;
-use Codedor\FormArchitect\Architect\TextareaBlock;
-use Codedor\FormArchitect\Architect\TextInputBlock;
-use Codedor\FormArchitect\Architect\TitleBlock;
 use Codedor\FormArchitect\Facades\BlockCollection;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
