@@ -28,7 +28,7 @@ class RadioButtonBlock extends BaseFormBlock
             ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->options($options)
             ->validationMessages([
-                "fields.{$uuid}.required" => __('validation.required', [
+                'required' => __('validation.required', [
                     'attribute' => $translated['label'],
                 ]),
             ]);
