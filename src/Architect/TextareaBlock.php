@@ -31,7 +31,7 @@ class TextareaBlock extends BaseFormBlock
                 "fields.{$uuid}.required" => __('validation.required', [
                     'attribute' => $translated['label'],
                 ]),
-                "string" => __('validation.max', [
+                'string' => __('validation.max', [
                     'attribute' => $translated['label'],
                     'max' => $max,
                 ]),
