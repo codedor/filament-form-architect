@@ -22,7 +22,7 @@ class CheckboxBlock extends BaseFormBlock
             ->rules($data['is_required'] ? 'accepted' : null)
             ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->validationMessages([
-                "fields.{$uuid}.accepted" => __('validation.accepted', [
+                'accepted' => __('validation.accepted', [
                     'attribute' => $translated['label'],
                 ]),
             ]);

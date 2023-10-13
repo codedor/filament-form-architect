@@ -52,6 +52,7 @@ class FormArchitectInput extends Field
 
                     $items = collect($items)
                         ->sortBy(fn ($item, $key) => array_search($key, $data['newKeys']))
+                        ->values()
                         ->toArray();
 
                     $component->state($items);

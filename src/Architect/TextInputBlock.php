@@ -25,7 +25,7 @@ class TextInputBlock extends BaseFormBlock
             ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->type($data['type'] ?? 'text')
             ->validationMessages([
-                "fields.{$uuid}.required" => __('validation.required', [
+                'required' => __('validation.required', [
                     'attribute' => $translated['label'],
                 ]),
             ]);

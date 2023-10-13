@@ -28,7 +28,7 @@ class TextareaBlock extends BaseFormBlock
             ->max($max ?? null)
             ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->validationMessages([
-                "fields.{$uuid}.required" => __('validation.required', [
+                'required' => __('validation.required', [
                     'attribute' => $translated['label'],
                 ]),
                 'string' => __('validation.max', [

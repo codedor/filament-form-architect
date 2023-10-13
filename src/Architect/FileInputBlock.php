@@ -29,7 +29,7 @@ class FileInputBlock extends BaseFormBlock
             ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->disk('private')
             ->validationMessages([
-                "files.{$uuid}.required" => __('validation.required', [
+                'required' => __('validation.required', [
                     'attribute' => $translated['label'],
                 ]),
             ]);
