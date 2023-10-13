@@ -19,31 +19,12 @@ class BlockCollection extends \Codedor\FilamentArchitect\BlockCollection
      */
     public function fromConfig(): self
     {
-        collect((array) config('filament-form-architect.default-blocks', []))
-            ->each(function ($blockClass): void {
-                /** @var TValue $class */
-                $class = $blockClass::make();
+        $config = (array) config('filament-form-architect.default-blocks', []);
 
-                $this->put($class->getName(), $class);
-            });
+        collect($config)
+            ->keys()
+            ->each(fn ($blockClass) => $this->add($blockClass::make()));
 
-        return $this;
-    }
-
-    public function render(array $blocks): View
-    {
-        return view('filament-form-architect::overview')
-            ->with(
-                'blocks',
-                collect($blocks)
-                    ->filter(fn (array $blockData) => $this->has($blockData['type']))
-                    ->map(function (array $blockData) {
-                        /** @var TValue $block */
-                        $block = $this->get($blockData['type']);
-                        $block = clone $block;
-
-                        return $block->data($blockData)->render();
-                    })
-            );
+        return $this->filter()->unique();
     }
 }

@@ -1,10 +1,14 @@
 <?php
 
-// config for Codedor/FormArchitect
+use Codedor\FormArchitect\Architect;
+
 return [
     'default-blocks' => [
-        \Codedor\FormArchitect\Architect\TextBlock::class,
-        \Codedor\FormArchitect\Architect\RadioButtonBlock::class,
-        \Codedor\FormArchitect\Architect\TextInputBlock::class,
+        Architect\TitleBlock::class => [],
+        Architect\TextInputBlock::class => [],
+        Architect\TextareaBlock::class => [],
+        Architect\RadioButtonBlock::class => [],
+        Architect\FileInputBlock::class => [],
+        Architect\CheckboxBlock::class => [],
     ],
 ];

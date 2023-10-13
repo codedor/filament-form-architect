@@ -15,7 +15,7 @@ class FormArchitectInput extends Field
 {
     protected string $view = 'filament-form-architect::architect-input';
 
-    public null|Closure|array $blocks = null;
+    public null|Closure|iterable $blocks = null;
 
     protected function setUp(): void
     {
@@ -198,17 +198,17 @@ class FormArchitectInput extends Field
         });
     }
 
-    public function blocks(null|Closure|array $blocks): static
+    public function blocks(null|Closure|iterable $blocks): static
     {
         $this->blocks = $blocks;
 
         return $this;
     }
 
-    public function getBlocks(): array
+    public function getBlocks(): iterable
     {
         return $this->evaluate($this->blocks)
-            ?? BlockCollection::filamentBlocks();
+            ?? BlockCollection::fromConfig();
     }
 
     public function getLocales(): array
@@ -234,7 +234,7 @@ class FormArchitectInput extends Field
                 continue;
             }
 
-            foreach ($row as $uuid => $field) {
+            foreach (array_keys($row) as $uuid) {
                 $items[$key][$uuid]['width'] = 12 / count($row);
             }
         }

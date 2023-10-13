@@ -2,7 +2,6 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\LivewireForms\Fields\FileField;
 use Codedor\LivewireForms\Fields\MultiFileField;
@@ -14,7 +13,7 @@ use Filament\Forms\Get;
 use Filament\Infolists\Components\ViewEntry;
 use Illuminate\Support\Collection;
 
-class FileInputBlock extends BaseBlock
+class FileInputBlock extends BaseFormBlock
 {
     protected ?string $name = 'File upload field';
 

@@ -2,7 +2,6 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\LivewireForms\Fields\TextareaField;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
@@ -10,15 +9,14 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 
-class TextareaBlock extends BaseBlock
+class TextareaBlock extends BaseFormBlock
 {
-    protected ?string $name = 'Textarea field';
+    protected ?string $name = 'Large text field';
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
         $max = $data['max'] ?? null;
 
-        // TODO: what to do with max value??
         return TextareaField::make($uuid)
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)

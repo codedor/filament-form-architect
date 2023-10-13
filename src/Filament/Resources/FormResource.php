@@ -8,6 +8,7 @@ use Codedor\FormArchitect\Architect\RadioButtonBlock;
 use Codedor\FormArchitect\Architect\TextareaBlock;
 use Codedor\FormArchitect\Architect\TextInputBlock;
 use Codedor\FormArchitect\Architect\TitleBlock;
+use Codedor\FormArchitect\Facades\BlockCollection;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
@@ -36,9 +37,9 @@ class FormResource extends Resource
                             ->required()
                             ->maxLength(255),
 
-                        Forms\Components\TextInput::make('email')
-                            ->email()
-                            ->maxLength(255),
+                        // Forms\Components\TextInput::make('email')
+                        //     ->email()
+                        //     ->maxLength(255),
 
                         Forms\Components\TextInput::make('max_submissions')
                             ->required()
@@ -47,14 +48,7 @@ class FormResource extends Resource
                             ->helperText('0 is unlimited'),
 
                         FormArchitectInput::make('fields')
-                            ->blocks([
-                                TitleBlock::make(),
-                                TextInputBlock::make(),
-                                TextareaBlock::make(),
-                                RadioButtonBlock::make(),
-                                FileInputBlock::make(),
-                                CheckboxBlock::make(),
-                            ]),
+                            ->blocks(BlockCollection::fromConfig()),
                     ])
                     ->translatableFields(fn () => [
                         Forms\Components\TextInput::make('email_subject'),
@@ -83,8 +77,8 @@ class FormResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('email')
+                //     ->searchable(),
 
                 Tables\Columns\TextColumn::make('max_submissions')
                     ->numeric()
@@ -101,11 +95,7 @@ class FormResource extends Resource
                     ->icon('heroicon-s-eye'),
 
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteAction::make(),
             ]);
     }
 

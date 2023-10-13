@@ -63,12 +63,19 @@ class Form extends Model
             ->map(function ($row) {
                 $fields = collect($row)
                     ->filter(fn ($field) => $field['data'][app()->getLocale()]['online'] ?? false)
-                    ->map(function ($field, $uuid) {
-                        return $field['type']::toLivewireForm(
+                    ->map(function ($fieldData, $uuid) {
+                        $field = $fieldData['type']::toLivewireForm(
                             $uuid,
-                            $field['data'] ?? [],
-                            $field['data'][app()->getLocale()] ?? [],
-                        )->width($field['width'] ?? 12);
+                            $fieldData['data'] ?? [],
+                            $fieldData['data'][app()->getLocale()] ?? [],
+                        );
+
+                        $config = config("filament-form-architect.default-blocks.{$fieldData['type']}", []);
+                        foreach ($config as $key => $value) {
+                            $field->{$key}($value);
+                        }
+
+                        return $field->width($fieldData['width'] ?? 12);
                     });
 
                 if ($fields->isEmpty()) {

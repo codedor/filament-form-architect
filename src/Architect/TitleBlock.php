@@ -2,7 +2,6 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\LivewireForms\Fields\Title;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
@@ -12,13 +11,12 @@ use Filament\Forms\Get;
 use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Support\HtmlString;
 
-class TitleBlock extends BaseBlock
+class TitleBlock extends BaseFormBlock
 {
-    protected ?string $name = 'Title component';
+    protected ?string $name = 'Static text';
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
-
         return Title::make($uuid)
             ->label(new HtmlString(
                 parse_link_picker_json(
@@ -39,11 +37,11 @@ class TitleBlock extends BaseBlock
                         ->label('Styling')
                         ->selectablePlaceholder(false)
                         ->options([
-                            'h2' => 'h2',
-                            'h3' => 'h3',
-                            'h4' => 'h4',
-                            'p' => 'p',
-                            'small' => 'small',
+                            'h2' => 'Largest (h2)',
+                            'h3' => 'Large (h3)',
+                            'h4' => 'Medium (h4)',
+                            'p' => 'Paragraph (p)',
+                            'small' => 'Small text',
                         ]),
                 ])
                 ->translatableFields(fn () => [

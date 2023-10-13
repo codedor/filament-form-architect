@@ -2,7 +2,6 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\CheckboxField;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
@@ -10,9 +9,9 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 
-class CheckboxBlock extends BaseBlock
+class CheckboxBlock extends BaseFormBlock
 {
-    protected ?string $name = 'Checkbox';
+    protected ?string $name = 'Checkbox field';
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {

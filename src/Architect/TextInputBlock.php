@@ -2,7 +2,6 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
 use Codedor\LivewireForms\Fields\Field;
 use Codedor\LivewireForms\Fields\TextField;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
@@ -11,7 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 
-class TextInputBlock extends BaseBlock
+class TextInputBlock extends BaseFormBlock
 {
     protected ?string $name = 'Text field';
 
