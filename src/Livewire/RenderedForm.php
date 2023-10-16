@@ -7,6 +7,7 @@ use Codedor\FormArchitect\Models\FormSubmission;
 use Codedor\LivewireForms\Fields\Button;
 use Codedor\LivewireForms\Form as LivewireFormsForm;
 use Codedor\LivewireForms\FormController;
+use Illuminate\Support\HtmlString;
 
 class RenderedForm extends FormController
 {
@@ -22,7 +23,7 @@ class RenderedForm extends FormController
         $this->formClass = 'dynamic';
         $this->formModel = $form;
 
-        parent::mount();
+        parent::mount('filament-form-architect::livewire.rendered-form');
     }
 
     public function saveData()
@@ -39,6 +40,16 @@ class RenderedForm extends FormController
                 'value' => $value,
             ])->values(),
         ]);
+    }
+
+    public function successMessage()
+    {
+        session()->flash(
+            'message',
+            new HtmlString($this->formModel->completion_message)
+        );
+
+        $this->dispatch('form-saved');
     }
 
     public function resetForm()

@@ -3,6 +3,7 @@
     'statePath',
     'arguments' => [],
     'color' => 'gray',
+    'label' => null,
 ])
 
 @php
@@ -10,11 +11,15 @@
     $wireClickAction = "mountFormComponentAction('{$statePath}', '{$action->getName()}', {$wireClickActionArguments})"
 @endphp
 
-<x-filament::icon-button
+<x-dynamic-component
+    :component="$label ? 'filament::button' : 'filament::icon-button'"
+    @class(['border-2 bg-white' => ! $label])
     :color="$color"
     :wire:click="$wireClickAction"
     :icon="$action->getIcon()"
-    class="border-2 bg-white"
     size="sm"
     icon-size="sm"
-/>
+    :label="$label"
+>
+    {{ $label }}
+</x-dynamic-component>

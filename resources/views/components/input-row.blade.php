@@ -66,11 +66,13 @@
     </div>
 
     <div class="flex flex-col gap-2">
-        <x-filament-form-architect::icon-button
-            :action="$getAction('addBlockBetween')"
-            :state-path="$statePath"
-            :arguments="['row' => $rowKey, 'insertAfter' => $uuid]"
-        />
+        @if ($canAddFields)
+            <x-filament-form-architect::icon-button
+                :action="$getAction('addBlockBetween')"
+                :state-path="$statePath"
+                :arguments="['row' => $rowKey, 'insertAfter' => $uuid]"
+            />
+        @endif
 
         {{-- @if (! $loop->last)
             <div

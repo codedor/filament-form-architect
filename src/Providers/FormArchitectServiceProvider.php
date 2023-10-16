@@ -20,6 +20,7 @@ class FormArchitectServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 '2023_10_10_130632_create_forms_table',
                 '2023_10_10_130633_create_form_submissions_table',
+                '2023_10_10_130634_add_tiptap_fields_to_forms',
             ])
             ->runsMigrations()
             ->hasViews();

@@ -4,6 +4,7 @@ namespace Codedor\FormArchitect\Filament\Resources;
 
 use Codedor\FormArchitect\Facades\BlockCollection;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
+use Codedor\FormArchitect\Models\Form as ModelsForm;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -39,18 +40,27 @@ class FormResource extends Resource
                             ->required()
                             ->numeric()
                             ->default(0)
-                            ->helperText('0 is unlimited')
-                            ->hidden(config('filament-form-architect.enable-submission-field') === false),
+                            ->helperText('Enter 0 to allow unlimited submissions.')
+                            ->hidden(ModelsForm::maxSubmissionsDisabled()),
 
                         FormArchitectInput::make('fields')
                             ->blocks(BlockCollection::fromConfig()),
                     ])
                     ->translatableFields(fn () => [
-                        Forms\Components\TextInput::make('email_subject'),
+                        // Forms\Components\TextInput::make('email_subject'),
 
-                        TiptapEditor::make('email_body'),
+                        // TiptapEditor::make('email_body'),
 
-                        Forms\Components\Toggle::make('online'),
+                        // Forms\Components\Toggle::make('online'),
+
+                        TiptapEditor::make('completion_message')
+                            ->label('Completion message')
+                            ->helperText('This message will be shown to the user after submitting the form.'),
+
+                        TiptapEditor::make('max_submissions_message')
+                            ->label('Maximum submissions message')
+                            ->helperText('This message will be shown to the user when the maximum amount of submissions has been reached.')
+                            ->hidden(ModelsForm::maxSubmissionsDisabled()),
                     ]),
             ]);
     }
@@ -77,7 +87,8 @@ class FormResource extends Resource
 
                 Tables\Columns\TextColumn::make('max_submissions')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->hidden(ModelsForm::maxSubmissionsDisabled()),
 
                 Tables\Columns\TextColumn::make('submissions')
                     ->sortable()

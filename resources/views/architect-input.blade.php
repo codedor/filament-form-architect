@@ -5,16 +5,16 @@
 @endphp
 
 <x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
-    <div class="flex flex-col gap-4">
-        <div class="flex w-full justify-center">
-            <x-filament-form-architect::icon-button
-                :action="$getAction('addBlock')"
-                :state-path="$getStatePath()"
-                :arguments="['row' => -1]"
-            />
-        </div>
+    <div class="flex flex-col">
+        <x-filament-form-architect::add-row-button
+            :action="$getAction('addBlock')"
+            :state-path="$getStatePath()"
+            :arguments="['row' => -1]"
+            :shown="count($state) === 0"
+        />
 
         <div
+            class="w-full flex flex-col gap-2"
             x-sortable
             x-on:end.stop="$wire.dispatchFormEvent('reorder-row', '{{ $statePath }}', {
                 newKeys: $event.target.sortable.toArray(),
@@ -22,17 +22,19 @@
         >
             @foreach ($state ?? [] as $rowKey => $row)
                 <div
-                    class="w-full flex gap-2 bg-white p-2 items-center"
+                    class="w-full flex gap-2 bg-white px-2 items-center"
                     x-sortable-item="{{ $rowKey }}"
                 >
-                    <div class="grow flex flex-col gap-4">
+                    <div class="grow flex flex-col gap-2">
                         <div class="grow flex gap-2 items-center">
                             <div class="flex flex-col gap-2">
-                                <x-filament-form-architect::icon-button
-                                    :action="$getAction('addBlockBetween')"
-                                    :state-path="$getStatePath()"
-                                    :arguments="['row' => $rowKey, 'insertAfter' => 0]"
-                                />
+                                @if (count($row) < $getMaxFieldsPerRow())
+                                    <x-filament-form-architect::icon-button
+                                        :action="$getAction('addBlockBetween')"
+                                        :state-path="$getStatePath()"
+                                        :arguments="['row' => $rowKey, 'insertAfter' => 0]"
+                                    />
+                                @endif
 
                                 @if (count($state) > 1)
                                     <x-filament::icon-button
@@ -63,19 +65,19 @@
                                         :locales="$locales"
                                         :state-path="$statePath"
                                         :get-action="$getAction"
+                                        :can-add-fields="count($row) < $getMaxFieldsPerRow()"
                                         :loop="$loop"
                                     />
                                 @endforeach
                             </div>
                         </div>
 
-                        <div class="flex w-full justify-center">
-                            <x-filament-form-architect::icon-button
-                                :action="$getAction('addBlock')"
-                                :state-path="$getStatePath()"
-                                :arguments="['row' => $rowKey]"
-                            />
-                        </div>
+                        <x-filament-form-architect::add-row-button
+                            :action="$getAction('addBlock')"
+                            :state-path="$getStatePath()"
+                            :arguments="['row' => $rowKey]"
+                            :shown="$loop->last"
+                        />
                     </div>
                 </div>
             @endforeach

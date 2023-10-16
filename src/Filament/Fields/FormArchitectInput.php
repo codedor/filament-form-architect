@@ -17,6 +17,8 @@ class FormArchitectInput extends Field
 
     public null|Closure|iterable $blocks = null;
 
+    public null|int|Closure $maxFieldsPerRow = 3;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -159,6 +161,21 @@ class FormArchitectInput extends Field
             );
 
             $component->state($items);
+
+            // xdata="{
+            //     init () {
+            //         $wire.on('openEditBlockModal', (arguments) => {
+            //             $nextTick(() =>
+            //                 $wire.mountFormComponentAction('data.fields', 'editBlock', arguments[0])
+            //             )
+            //         })
+            //     }
+            // }"
+            // $component->getLivewire()->dispatch('openEditBlockModal', [
+            //     'uuid' => $newUuid,
+            //     'block' => $newBlock,
+            //     ...$arguments,
+            // ]);
         });
     }
 
@@ -197,6 +214,18 @@ class FormArchitectInput extends Field
 
             $component->state($items);
         });
+    }
+
+    public function maxFieldsPerRow(null|int|Closure $maxFieldsPerRow): static
+    {
+        $this->maxFieldsPerRow = $maxFieldsPerRow;
+
+        return $this;
+    }
+
+    public function getMaxFieldsPerRow(): int
+    {
+        return $this->evaluate($this->maxFieldsPerRow) ?? 12;
     }
 
     public function blocks(null|Closure|iterable $blocks): static

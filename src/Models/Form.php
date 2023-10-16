@@ -6,6 +6,7 @@ use Codedor\FormArchitect\Database\Factories\FormFactory;
 use Codedor\LivewireForms\Fields\Row;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 use Spatie\Translatable\HasTranslations;
 
 class Form extends Model
@@ -18,12 +19,16 @@ class Form extends Model
         'email',
         'max_submissions',
         'fields',
+        'completion_message',
+        'max_submissions_message',
         'email_subject',
         'email_body',
         'online',
     ];
 
     public $translatable = [
+        'completion_message',
+        'max_submissions_message',
         'email_subject',
         'email_body',
         'online',
@@ -93,5 +98,30 @@ class Form extends Model
             })
             ->filter()
             ->toArray();
+    }
+
+    public function allowSubmissions(): bool
+    {
+        return self::maxSubmissionsDisabled() || (
+            $this->max_submissions === 0 ||
+            $this->submissions()->count() < $this->max_submissions
+        );
+    }
+
+    public function getMaxSubmissionMessage(): HtmlString
+    {
+        $message = $this->max_submissions_message;
+        if (empty(strip_tags($message))) {
+            $message = __html('filament-form-architect::form.max_submissions_message :max', [
+                'max' => $this->max_submissions,
+            ]);
+        }
+
+        return new HtmlString($message);
+    }
+
+    public static function maxSubmissionsDisabled(): bool
+    {
+        return config('filament-form-architect.enable-submission-field') === false;
     }
 }
