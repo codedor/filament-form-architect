@@ -24,6 +24,7 @@ class TextInputBlock extends BaseFormBlock
             ->rules($data['is_required'] ? 'required' : null)
             ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
             ->type($data['type'] ?? 'text')
+            ->placeholder(($data['show_placeholder'] ?? true) ? ($translated['label'] ?? null) : '')
             ->validationMessages([
                 'required' => __('validation.required', [
                     'attribute' => $translated['label'],
@@ -44,6 +45,9 @@ class TextInputBlock extends BaseFormBlock
                             'email' => 'E-mail',
                             'number' => 'Number',
                         ]),
+
+                    Toggle::make('show_placeholder')
+                        ->label('Show the label as a placeholder inside the field'),
 
                     Toggle::make('is_required'),
                 ])

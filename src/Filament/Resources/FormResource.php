@@ -22,6 +22,8 @@ class FormResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
+    protected static ?string $modelLabel = 'Custom Form';
+
     public static function form(Form $form): Form
     {
         return $form
