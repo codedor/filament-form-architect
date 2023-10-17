@@ -27,6 +27,7 @@ class TextareaBlock extends BaseFormBlock
             ])
             ->max($max ?? null)
             ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
+            ->placeholder(($data['hide_placeholder'] ?? false) ? '' : ($translated['label'] ?? null))
             ->validationMessages([
                 'required' => __('validation.required', [
                     'attribute' => $translated['label'],
@@ -47,6 +48,9 @@ class TextareaBlock extends BaseFormBlock
                     TextInput::make('max')
                         ->label('Maximum allowed characters')
                         ->numeric(),
+
+                    Toggle::make('hide_placeholder')
+                        ->label('Hide the placeholder inside the field'),
 
                     Toggle::make('is_required'),
                 ])
