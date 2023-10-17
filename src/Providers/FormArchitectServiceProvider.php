@@ -2,8 +2,6 @@
 
 namespace Codedor\FormArchitect\Providers;
 
-use Codedor\FormArchitect\BlockCollection;
-use Codedor\FormArchitect\Livewire\EditModal;
 use Codedor\FormArchitect\Livewire\RenderedForm;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
@@ -26,16 +24,8 @@ class FormArchitectServiceProvider extends PackageServiceProvider
             ->hasViews();
     }
 
-    public function registeringPackage(): void
-    {
-        $this->app->bind(BlockCollection::class, function () {
-            return (new BlockCollection())->fromConfig();
-        });
-    }
-
     public function bootingPackage()
     {
         Livewire::component('filament-form-architect-rendered-form', RenderedForm::class);
-        Livewire::component('filament-form-architect-edit-modal', EditModal::class);
     }
 }

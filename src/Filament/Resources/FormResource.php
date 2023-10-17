@@ -2,7 +2,6 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
-use Codedor\FormArchitect\Facades\BlockCollection;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\FormArchitect\Models\Form as ModelsForm;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
@@ -45,8 +44,7 @@ class FormResource extends Resource
                             ->helperText('Enter 0 to allow unlimited submissions.')
                             ->hidden(ModelsForm::maxSubmissionsDisabled()),
 
-                        FormArchitectInput::make('fields')
-                            ->blocks(BlockCollection::fromConfig()),
+                        FormArchitectInput::make('fields'),
                     ])
                     ->translatableFields(fn () => [
                         // Forms\Components\TextInput::make('email_subject'),
