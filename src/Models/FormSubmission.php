@@ -30,9 +30,12 @@ class FormSubmission extends Model
         $oldSchema = collect($this->fields)->mapWithKeys(fn ($field) => $field);
 
         return collect($this->data)->map(function ($field) use ($currentSchema, $oldSchema) {
-            $fieldClass = $currentSchema[$field['key']]['type']
-                ?? $oldSchema[$field['key']]['type']
-                ?? null;
+            $fieldClass = get_architect_block(
+                array_keys(config('filament-form-architect.default-blocks', [])),
+                $currentSchema[$field['key']]['type']
+                    ?? $oldSchema[$field['key']]['type']
+                    ?? null
+            );
 
             $name = $currentSchema[$field['key']]['data']['working_title']
                 ?? $oldSchema[$field['key']]['data']['working_title']
