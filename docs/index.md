@@ -12,7 +12,7 @@ You can install the package via composer:
 composer require codedor/filament-form-architect
 ```
 
-You can publish and run the migrations with:
+You can publish (optional) and run the migrations with:
 
 ```bash
 php artisan vendor:publish --tag="filament-form-architect-migrations"
@@ -23,17 +23,6 @@ You can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="filament-form-architect-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-    'default-blocks' => [
-        \Codedor\FormArchitect\Architect\RadioButtonBlock::class,
-        \Codedor\FormArchitect\Architect\TextInputBlock::class,
-    ],
-];
 ```
 
 Optionally, you can publish the views using
@@ -57,22 +46,79 @@ public function panel(Panel $panel): Panel
 
 ```
 
+## Creating a block/field
+
+See our [Architect](https://github.com/codedor/filament-architect) package for how to create new blocks.
+
+The only difference here is that we have a `toLivewireForm` function instead of a `render` function, which returns the Livewire form component.
+
+For example, the `TextInputBlock`:
+
+```php
+public static function toLivewireForm(string $uuid, array $data, array $translated): Field
+{
+    return TextField::make($uuid)
+        ->label($translated['label'])
+        ->required($data['is_required'] ?? false)
+        ->rules($data['is_required'] ? 'required' : null)
+        ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
+        ->type($data['type'] ?? 'text')
+        ->placeholder(($data['hide_placeholder'] ?? false) ? '' : ($translated['label'] ?? null))
+        ->validationMessages([
+            'required' => __('validation.required', [
+                'attribute' => $translated['label'],
+            ]),
+        ]);
+}
+```
+
 ## Configuration
 
 This package has a couple of config values:
 
 ```php
-<?php
+use Codedor\FormArchitect\Architect;
 
 return [
+    'enable-submission-field' => false,
+    'default-row-attributes' => [
+        'divClass' => 'row',
+    ],
     'default-blocks' => [
-        \Codedor\FormArchitect\Architect\RadioButtonBlock::class,
-        \Codedor\FormArchitect\Architect\TextInputBlock::class,
+        Architect\TitleBlock::class => [],
+        Architect\TextInputBlock::class => [],
+        Architect\TextareaBlock::class => [],
+        Architect\RadioButtonBlock::class => [],
+        Architect\FileInputBlock::class => [],
+        Architect\CheckboxBlock::class => [],
     ],
 ];
 ```
 
+### enable-submission-field
+
+If set to true, the form resource will have an extra `Max submissions` field, where you can set how many times the form can be submitted. If set to false, the field will not be shown.
+
+An extra `Max submissions reached` field will also be available under the translations tab, which you can use to customize the message that will be shown when the max submissions is reached.
+
+### default-row-attributes
+
+This configures the default attributes for the row block. For example the `divClass` attribute is used to set the class of the row div.
+
 ### default-blocks
 
-This configures which blocks will be used in the form builder.
+This configures which blocks will be used in the form builder, see our [Architect](https://github.com/codedor/filament-architect) package for more information about blocks.
 
+A slight difference with the normal Architect blocks is that we can pass an array per block, which will be used as the default attributes for that block. For example:
+
+```php
+'default-blocks' => [
+    Architect\TitleBlock::class => [
+        'divClass' => 'mb-3',
+        'headingClass' => 'form__title',
+    ],
+    ...
+],
+```
+
+See our [Livewire Forms](https://github.com/codedor/laravel-livewire-forms) package for an overview of available attributes.
