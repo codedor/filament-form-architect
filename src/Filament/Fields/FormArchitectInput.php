@@ -15,6 +15,8 @@ class FormArchitectInput extends ArchitectInput
     {
         parent::setUp();
 
+        $this->hasPreview(false);
+
         $this->blocks(
             collect(config('filament-form-architect.default-blocks', []))
                 ->keys()
