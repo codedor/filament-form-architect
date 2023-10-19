@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "codedor/filament-architect": "^0.4",
+        "codedor/filament-architect": "^0.5",
         "codedor/laravel-livewire-forms": "^4.0",
         "codedor/laravel-locale-collection": "0.0.*",
         "filament/filament": "^3.0",
