@@ -9,6 +9,8 @@ class FormArchitectInput extends ArchitectInput
 {
     public null|int|Closure $maxFieldsPerRow = 3;
 
+    public Closure|bool $hasTemplates = false;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -17,7 +19,8 @@ class FormArchitectInput extends ArchitectInput
             collect(config('filament-form-architect.default-blocks', []))
                 ->keys()
                 ->map(fn (string $class) => $class::make())
-                ->toArray()
+                ->unique()
+                ->filter()
         );
     }
 }

@@ -69,13 +69,18 @@ class Form extends Model
                 $fields = collect($row)
                     ->filter(fn ($field) => $field['data'][app()->getLocale()]['online'] ?? false)
                     ->map(function ($fieldData, $uuid) {
-                        $field = $fieldData['type']::toLivewireForm(
+                        $class = get_architect_block(
+                            array_keys(config('filament-form-architect.default-blocks', [])),
+                            $fieldData['type'],
+                        );
+
+                        $field = $class::toLivewireForm(
                             $uuid,
                             $fieldData['data'] ?? [],
                             $fieldData['data'][app()->getLocale()] ?? [],
                         );
 
-                        $config = config("filament-form-architect.default-blocks.{$fieldData['type']}", []);
+                        $config = config("filament-form-architect.default-blocks.{$class}", []);
                         foreach ($config as $key => $value) {
                             $field->{$key}($value);
                         }
