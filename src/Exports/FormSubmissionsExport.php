@@ -3,7 +3,6 @@
 namespace Codedor\FormArchitect\Exports;
 
 use Codedor\FormArchitect\Models\FormSubmission;
-use Filament\Infolists\Components\Entry;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
