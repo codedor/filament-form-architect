@@ -43,6 +43,14 @@ class FileInputBlock extends BaseFormBlock
         );
     }
 
+    public static function toExcelExport(mixed $value): string
+    {
+        return Collection::wrap(Attachment::find($value))
+            ->filter()
+            ->map(fn (Attachment $attachment) => $attachment->url)
+            ->join(', ');
+    }
+
     public function schema(): array
     {
         return [

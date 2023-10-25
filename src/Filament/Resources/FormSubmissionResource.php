@@ -2,6 +2,7 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
+use Codedor\FormArchitect\Filament\Actions\ExportFormSubmissions;
 use Codedor\FormArchitect\Models\FormSubmission;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -46,9 +47,8 @@ class FormSubmissionResource extends Resource
                 Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                ExportFormSubmissions::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

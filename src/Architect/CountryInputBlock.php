@@ -2,36 +2,44 @@
 
 namespace Codedor\FormArchitect\Architect;
 
+use Codedor\LivewireForms\Fields\CountryField;
 use Codedor\LivewireForms\Fields\Field;
-use Codedor\LivewireForms\Fields\RadioGroup;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
-use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use Filament\Infolists\Components\TextEntry;
 use Illuminate\Support\HtmlString;
 
-class RadioButtonBlock extends BaseFormBlock
+class CountryInputBlock extends BaseFormBlock
 {
-    protected ?string $name = 'Radio buttons';
+    protected ?string $name = 'Country field';
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
-        $options = collect($translated['options'] ?? [])
-            ->mapWithKeys(fn ($option) => [$option => $option])
-            ->toArray();
-
-        return RadioGroup::make($uuid)
+        return CountryField::make($uuid)
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)
             ->gdprNotice(new HtmlString($translated['gdpr_notice'] ?? null))
-            ->options($options)
+            ->default($data['default_value'] ?? null)
             ->validationMessages([
                 'required' => __('validation.required', [
                     'attribute' => $translated['label'],
                 ]),
             ]);
+    }
+
+    public static function toInfolist(string $name, mixed $value)
+    {
+        return TextEntry::make($name)
+            ->getStateUsing(fn () => getCountryName($value));
+    }
+
+    public static function toExcelExport(mixed $value): string
+    {
+        return getCountryName($value);
     }
 
     public function schema(): array
@@ -40,6 +48,10 @@ class RadioButtonBlock extends BaseFormBlock
             TranslatableTabs::make()
                 ->persistInQueryString(false)
                 ->defaultFields([
+                    Select::make('default_value')
+                        ->label('Default selected country')
+                        ->options(fn () => getCountryList()),
+
                     Toggle::make('is_required'),
                 ])
                 ->translatableFields(fn () => [
@@ -49,9 +61,6 @@ class RadioButtonBlock extends BaseFormBlock
                     TextInput::make('gdpr_notice')
                         ->label('GDPR Notice')
                         ->helperText('This will explain why you need this information and how you will use it.'),
-
-                    Repeater::make('options')
-                        ->simple(TextInput::make('label')),
 
                     Toggle::make('online'),
                 ]),

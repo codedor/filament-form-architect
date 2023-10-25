@@ -4,6 +4,7 @@ namespace Codedor\FormArchitect\Models;
 
 use Filament\Infolists\Components\TextEntry;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class FormSubmission extends Model
 {
@@ -26,6 +27,28 @@ class FormSubmission extends Model
 
     public function toInfolistSchema(): array
     {
+        return $this->getDataFieldStack()->map(function (object $field) {
+            if (class_exists($field->class) && method_exists($field->class, 'toInfolist')) {
+                return $field->class::toInfolist($field->name, $field->value);
+            }
+
+            return TextEntry::make($field->name)->getStateUsing(fn () => $field->value);
+        })->toArray();
+    }
+
+    public function toExcelExport(): array
+    {
+        return $this->getDataFieldStack()->mapWithKeys(function (object $field) {
+            if (class_exists($field->class) && method_exists($field->class, 'toExcelExport')) {
+                return [$field->name => $field->class::toExcelExport($field->value)];
+            }
+
+            return [$field->name => $field->value];
+        })->toArray();
+    }
+
+    private function getDataFieldStack(): Collection
+    {
         $currentSchema = collect($this->form->fields)->mapWithKeys(fn ($field) => $field);
         $oldSchema = collect($this->fields)->mapWithKeys(fn ($field) => $field);
 
@@ -41,11 +64,11 @@ class FormSubmission extends Model
                 ?? $oldSchema[$field['key']]['data']['working_title']
                 ?? $field['key'];
 
-            if (class_exists($fieldClass) && method_exists($fieldClass, 'toInfolist')) {
-                return $fieldClass::toInfolist($name, $field['value']);
-            }
-
-            return TextEntry::make($name)->getStateUsing(fn () => $field['value']);
-        })->toArray();
+            return (object) [
+                'name' => $name,
+                'value' => $field['value'] ?? null,
+                'class' => $fieldClass,
+            ];
+        });
     }
 }

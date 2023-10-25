@@ -72,6 +72,16 @@ public static function toLivewireForm(string $uuid, array $data, array $translat
 }
 ```
 
+We also have a `toExcelExport` function, which returns the value of the field for the excel export.
+For example, the `CheckboxBlock`:
+
+```php
+public static function toExcelExport(mixed $value): string
+{
+    return $value ? 'Yes' : 'No';
+}
+```
+
 ## Configuration
 
 This package has a couple of config values:

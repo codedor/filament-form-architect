@@ -3,7 +3,7 @@
 namespace Codedor\FormArchitect\Architect;
 
 use Codedor\LivewireForms\Fields\Field;
-use Codedor\LivewireForms\Fields\RadioGroup;
+use Codedor\LivewireForms\Fields\SelectField;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
@@ -11,9 +11,9 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Illuminate\Support\HtmlString;
 
-class RadioButtonBlock extends BaseFormBlock
+class SelectInputBlock extends BaseFormBlock
 {
-    protected ?string $name = 'Radio buttons';
+    protected ?string $name = 'Dropdown select field';
 
     public static function toLivewireForm(string $uuid, array $data, array $translated): Field
     {
@@ -21,7 +21,7 @@ class RadioButtonBlock extends BaseFormBlock
             ->mapWithKeys(fn ($option) => [$option => $option])
             ->toArray();
 
-        return RadioGroup::make($uuid)
+        return SelectField::make($uuid)
             ->label($translated['label'])
             ->required($data['is_required'] ?? false)
             ->rules($data['is_required'] ? 'required' : null)

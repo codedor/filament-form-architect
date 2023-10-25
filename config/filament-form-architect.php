@@ -8,11 +8,13 @@ return [
         'divClass' => 'row',
     ],
     'default-blocks' => [
-        Architect\TitleBlock::class => [],
-        Architect\TextInputBlock::class => [],
-        Architect\TextareaBlock::class => [],
-        Architect\RadioButtonBlock::class => [],
-        Architect\FileInputBlock::class => [],
         Architect\CheckboxBlock::class => [],
+        Architect\CountryInputBlock::class => [],
+        Architect\FileInputBlock::class => [],
+        Architect\RadioButtonBlock::class => [],
+        Architect\SelectInputBlock::class => [],
+        Architect\TextareaBlock::class => [],
+        Architect\TextInputBlock::class => [],
+        Architect\TitleBlock::class => [],
     ],
 ];

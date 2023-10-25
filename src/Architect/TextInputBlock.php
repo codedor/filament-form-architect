@@ -44,6 +44,7 @@ class TextInputBlock extends BaseFormBlock
                             'text' => 'Text',
                             'email' => 'E-mail',
                             'number' => 'Number',
+                            'date' => 'Date',
                         ]),
 
                     Toggle::make('hide_placeholder')

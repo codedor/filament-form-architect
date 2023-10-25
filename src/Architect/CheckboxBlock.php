@@ -8,6 +8,7 @@ use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use Filament\Infolists\Components\TextEntry;
 use Illuminate\Support\HtmlString;
 
 class CheckboxBlock extends BaseFormBlock
@@ -26,6 +27,16 @@ class CheckboxBlock extends BaseFormBlock
                     'attribute' => $translated['label'],
                 ]),
             ]);
+    }
+
+    public static function toInfolist(string $name, mixed $value)
+    {
+        return TextEntry::make($name)->getStateUsing(fn () => $value ? 'Yes' : 'No');
+    }
+
+    public static function toExcelExport(mixed $value): string
+    {
+        return $value ? 'Yes' : 'No';
     }
 
     public function schema(): array

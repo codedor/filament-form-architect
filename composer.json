@@ -15,6 +15,7 @@
         "codedor/laravel-locale-collection": "0.0.*",
         "filament/filament": "^3.0",
         "guava/filament-drafts": "^2.1",
+        "maatwebsite/excel": "^3.1",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.12"
     },
