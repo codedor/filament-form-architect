@@ -132,3 +132,55 @@ A slight difference with the normal Architect blocks is that we can pass an arra
 ```
 
 See our [Livewire Forms](https://github.com/codedor/laravel-livewire-forms) package for an overview of available attributes.
+
+## Inline message vs. redirect to confirmation page
+
+By default, we show an inline success message, but if you want to redirect to a confirmation page, you can do so by passing a `redirect-to` route to the Livewire component. If passed, we will redirect to this route and flash the form confirmation message to the session.
+
+For example:
+
+Create a new route:
+```php
+Route::get('form/confirm', Controllers\FormConfirmController::class)
+    ->name('form.confirm');
+```
+
+The controller:
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class FormConfirmController extends Controller
+{
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(Request $request)
+    {
+        return view('form.confirm', [
+            'titleForLayout' => __('form.confirmation page title'),
+        ]);
+    }
+}
+```
+
+The blade file:
+
+```blade
+<x-app-layout :title-for-layout="$titleForLayout">
+    <h1>{{ __('form.confirmation title') }}</h1>
+    @if (session('completion_message'))
+        {!! session('completion_message') !!}
+    @endif
+</x-app-layout>
+```
+
+To pass the `redirect-to` variable, override the form.blade.php, by creating a new file `resources/views/vendor/filament-form-architect/form.blade.php` with the following content:
+
+```blade
+<livewire:filament-form-architect-rendered-form 
+    :$form 
+    :redirect-to="translate_route('form.confirm')" 
+/>
+```

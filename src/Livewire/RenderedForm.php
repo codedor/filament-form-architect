@@ -12,6 +12,7 @@ use Illuminate\Support\HtmlString;
 class RenderedForm extends FormController
 {
     public ?Form $formModel;
+    public ?string $redirectTo = null;
 
     public string $modelClass = FormSubmission::class;
 
@@ -19,9 +20,11 @@ class RenderedForm extends FormController
         string $component = null,
         string $formClass = null,
         Form $form = null,
+        ?string $redirectTo = null,
     ) {
         $this->formClass = 'dynamic';
         $this->formModel = $form;
+        $this->redirectTo = $redirectTo;
 
         parent::mount('filament-form-architect::livewire.rendered-form');
     }
@@ -44,6 +47,11 @@ class RenderedForm extends FormController
 
     public function successMessage()
     {
+        if ($this->redirectTo) {
+            return redirect()->to($this->redirectTo)
+                ->with('completion_message', $this->formModel->completion_message);
+        }
+
         session()->flash(
             'message',
             new HtmlString($this->formModel->completion_message)
