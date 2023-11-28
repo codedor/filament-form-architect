@@ -12,6 +12,7 @@ use Illuminate\Support\HtmlString;
 class RenderedForm extends FormController
 {
     public ?Form $formModel;
+
     public ?string $redirectTo = null;
 
     public string $modelClass = FormSubmission::class;
@@ -20,7 +21,7 @@ class RenderedForm extends FormController
         string $component = null,
         string $formClass = null,
         Form $form = null,
-        ?string $redirectTo = null,
+        string $redirectTo = null,
     ) {
         $this->formClass = 'dynamic';
         $this->formModel = $form;
