@@ -2,10 +2,19 @@
 
 namespace Codedor\FormArchitect\Models;
 
+use Carbon\Carbon;
 use Filament\Infolists\Components\TextEntry;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * @property int $id
+ * @property Carbon $created_at
+ * @property string $locale
+ * @property Form $form
+ * @property array $fields
+ * @property array $data
+ */
 class FormSubmission extends Model
 {
     public $fillable = [

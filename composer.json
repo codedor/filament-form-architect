@@ -10,10 +10,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "codedor/filament-architect": "^0.5",
+        "codedor/filament-architect": "^1.0",
+        "codedor/filament-translatable-strings": "^1.0",
         "codedor/laravel-livewire-forms": "^4.0",
-        "codedor/laravel-locale-collection": "0.0.*",
-        "filament/filament": "^3.0",
+        "codedor/laravel-locale-collection": "^1.0",
+        "filament/filament": "^3.1",
         "guava/filament-drafts": "^2.1",
         "maatwebsite/excel": "^3.1",
         "illuminate/contracts": "^10.0",
@@ -23,7 +24,7 @@
         "codedor/facade-docblock-generator": "^0.0.1",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.0",
-        "nunomaduro/larastan": "^2.0",
+        "larastan/larastan": "^2.0",
         "orchestra/testbench": "^8.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
@@ -63,10 +64,6 @@
         {
             "type": "git",
             "url": "https://github.com/jyrkidn/filament-oembed.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/codedor/filament-resource-picker.git"
         }
     ]
 }

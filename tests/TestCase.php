@@ -4,6 +4,7 @@ namespace Codedor\FormArchitect\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
+use Codedor\FilamentArchitect\Providers\FilamentArchitectServiceProvider;
 use Codedor\FormArchitect\Filament\FormArchitectPlugin;
 use Codedor\FormArchitect\Providers\FormArchitectServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
@@ -35,6 +36,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
+            FilamentArchitectServiceProvider::class,
             FormArchitectServiceProvider::class,
             LivewireServiceProvider::class,
             FilamentServiceProvider::class,

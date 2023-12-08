@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * @property int $id
+ * @property Carbon $created_at
+ * @property array $fields
+ * @property string $completion_message
+ * @property int $max_submissions
+ * @property string $max_submissions_message
+ */
 class Form extends Model
 {
     use HasFactory;

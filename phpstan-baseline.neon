@@ -1,6 +1,2 @@
 parameters:
 	ignoreErrors:
-		-
-			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Schema\\\\Blueprint\\:\\:drafts\\(\\)\\.$#"
-			count: 1
-			path: database/migrations/create_forms_table.php

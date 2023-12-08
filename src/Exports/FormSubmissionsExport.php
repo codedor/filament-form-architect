@@ -23,7 +23,7 @@ class FormSubmissionsExport implements FromCollection, WithHeadings
     {
         $this->submissions = $submissions->map(function (FormSubmission $record) {
             return collect($record->toExcelExport())
-                ->put('Submitted at', $record->created_at?->format('Y-m-d H:i:s'))
+                ->put('Submitted at', $record->created_at->format('Y-m-d H:i:s'))
                 ->put('Locale', $record->locale)
                 ->put('ID', $record->id);
         });

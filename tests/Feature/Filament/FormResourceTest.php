@@ -13,6 +13,6 @@ it('has an index page', function () {
 
 it('has only an index and edit action', function () {
     expect(FormResource::getPages())
-        ->toHaveCount(3)
-        ->toHaveKeys(['index', 'create', 'edit']);
+        ->toHaveCount(4)
+        ->toHaveKeys(['index', 'create', 'edit', 'submissions']);
 });
