@@ -18,10 +18,10 @@ class RenderedForm extends FormController
     public string $modelClass = FormSubmission::class;
 
     public function mount(
-        string $component = null,
-        string $formClass = null,
-        Form $form = null,
-        string $redirectTo = null,
+        ?string $component = null,
+        ?string $formClass = null,
+        ?Form $form = null,
+        ?string $redirectTo = null,
     ) {
         $this->formClass = 'dynamic';
         $this->formModel = $form;
