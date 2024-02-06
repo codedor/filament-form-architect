@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "awcodes/filament-tiptap-editor": "^3.2",
         "codedor/filament-architect": "^1.0",
         "codedor/filament-translatable-strings": "^1.0",
         "codedor/laravel-livewire-forms": "^4.0",

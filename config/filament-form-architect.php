@@ -17,4 +17,5 @@ return [
         Architect\TextInputBlock::class => [],
         Architect\TitleBlock::class => [],
     ],
+    'checkbox-tiptap-profile' => 'minimal',
 ];

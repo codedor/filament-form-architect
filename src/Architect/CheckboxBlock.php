@@ -9,6 +9,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Infolists\Components\TextEntry;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Support\HtmlString;
 
 class CheckboxBlock extends BaseFormBlock
@@ -48,8 +49,9 @@ class CheckboxBlock extends BaseFormBlock
                     Toggle::make('is_required'),
                 ])
                 ->translatableFields(fn () => [
-                    TextInput::make('label')
-                        ->required(fn (Get $get) => $get('online')),
+                    TiptapEditor::make('label')
+                        ->required(fn (Get $get) => $get('online'))
+                        ->tools(config('filament-form-architect.checkbox-tiptap-profile', 'minimal')),
 
                     TextInput::make('gdpr_notice')
                         ->label('GDPR Notice')

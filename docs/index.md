@@ -102,6 +102,7 @@ return [
         Architect\FileInputBlock::class => [],
         Architect\CheckboxBlock::class => [],
     ],
+    'checkbox-tiptap-profile' => 'minimal',
 ];
 ```
 
@@ -132,6 +133,10 @@ A slight difference with the normal Architect blocks is that we can pass an arra
 ```
 
 See our [Livewire Forms](https://github.com/codedor/laravel-livewire-forms) package for an overview of available attributes.
+
+### checkbox-tiptap-profile
+
+Since the checkbox block uses tiptap for the label, you can set the profile here. The default is `minimal`.
 
 ## Inline message vs. redirect to confirmation page
 
