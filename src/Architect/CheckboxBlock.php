@@ -51,7 +51,7 @@ class CheckboxBlock extends BaseFormBlock
                 ->translatableFields(fn () => [
                     TiptapEditor::make('label')
                         ->required(fn (Get $get) => $get('online'))
-                        ->tools(config('filament-form-architect.checkbox-tiptap-profile', 'minimal')),
+                        ->profile(config('filament-form-architect.checkbox-tiptap-profile', 'minimal')),
 
                     TextInput::make('gdpr_notice')
                         ->label('GDPR Notice')
