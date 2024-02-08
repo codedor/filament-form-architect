@@ -47,11 +47,11 @@ class SendFormSubmission extends Mailable
         return new Content(
             view: 'filament-mail-templates::mail.template',
             with: [
-                'body' => view('filament-form-architect::mail.admin-mail', [
+                'body' => new HtmlString(view('filament-form-architect::mail.admin-mail', [
                     'body' => parse_link_picker_json($this->form->email_body),
                     'data' => $this->formSubmission->toExcelExport(),
                     'url' => FormResource::getUrl('submissions', ['record' => $this->form]),
-                ])->render(),
+                ])->render()),
 
                 'template' => new MailTemplate([
                     'from_email' => $this->form->getFromEmail(),
