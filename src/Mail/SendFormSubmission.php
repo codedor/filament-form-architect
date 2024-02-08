@@ -4,7 +4,6 @@ namespace Codedor\FormArchitect\Mail;
 
 use Codedor\FilamentMailTemplates\Models\MailTemplate;
 use Codedor\FormArchitect\Filament\Resources\FormResource;
-use Codedor\FormArchitect\Filament\Resources\FormSubmissionResource;
 use Codedor\FormArchitect\Models\Form;
 use Codedor\FormArchitect\Models\FormSubmission;
 use Illuminate\Bus\Queueable;
@@ -13,7 +12,6 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\HtmlString;
 
 class SendFormSubmission extends Mailable
 {
