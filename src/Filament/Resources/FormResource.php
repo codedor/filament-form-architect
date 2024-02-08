@@ -3,7 +3,6 @@
 namespace Codedor\FormArchitect\Filament\Resources;
 
 use Codedor\FilamentMailTemplates\Facades\MailTemplateFallbacks;
-use Codedor\FilamentMailTemplates\Models\MailTemplate;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\FormArchitect\Models\Form as ModelsForm;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
@@ -77,11 +76,11 @@ class FormResource extends Resource
                         FormArchitectInput::make('fields'),
                     ])
                     ->translatableFields(fn () => [
-                         Forms\Components\TextInput::make('email_subject')
-                             ->hidden(ModelsForm::adminEmailsDisabled()),
+                        Forms\Components\TextInput::make('email_subject')
+                            ->hidden(ModelsForm::adminEmailsDisabled()),
 
-                         TiptapEditor::make('email_body')
-                             ->hidden(ModelsForm::adminEmailsDisabled()),
+                        TiptapEditor::make('email_body')
+                            ->hidden(ModelsForm::adminEmailsDisabled()),
 
                         TiptapEditor::make('completion_message')
                             ->label('Completion message')
@@ -92,7 +91,7 @@ class FormResource extends Resource
                             ->helperText('This message will be shown to the user when the maximum amount of submissions has been reached.')
                             ->hidden(ModelsForm::maxSubmissionsDisabled()),
 
-                         Forms\Components\Toggle::make('online'),
+                        Forms\Components\Toggle::make('online'),
                     ]),
             ]);
     }

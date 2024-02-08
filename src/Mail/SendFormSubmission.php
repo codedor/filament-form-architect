@@ -23,7 +23,8 @@ class SendFormSubmission extends Mailable
     public function __construct(
         public FormSubmission $formSubmission,
         public Form $form
-    ) {}
+    ) {
+    }
 
     /**
      * Get the message envelope.
@@ -48,7 +49,7 @@ class SendFormSubmission extends Mailable
                 'template' => new MailTemplate([
                     'from_email' => $this->form->getFromEmail(),
                     'from_name' => config('app.name'),
-                ])
+                ]),
             ]
         );
     }
