@@ -3,6 +3,8 @@
 namespace Codedor\FormArchitect\Mail;
 
 use Codedor\FilamentMailTemplates\Models\MailTemplate;
+use Codedor\FormArchitect\Filament\Resources\FormResource;
+use Codedor\FormArchitect\Filament\Resources\FormSubmissionResource;
 use Codedor\FormArchitect\Models\Form;
 use Codedor\FormArchitect\Models\FormSubmission;
 use Illuminate\Bus\Queueable;
@@ -44,11 +46,17 @@ class SendFormSubmission extends Mailable
         return new Content(
             view: 'filament-mail-templates::mail.template',
             with: [
-                'body' => new HtmlString(parse_link_picker_json($this->form->email_body)),
+                'body' => view('filament-form-architect::mail.admin-mail', [
+                    'body' => parse_link_picker_json($this->form->email_body),
+                    'data' => $this->formSubmission->toExcelExport(),
+                    'url' => FormResource::getUrl('submissions', ['record' => $this->form]),
+                ])->render(),
+
                 'template' => new MailTemplate([
                     'from_email' => $this->form->getFromEmail(),
                     'from_name' => config('app.name'),
-                ])
+                ]),
+
             ]
         );
     }

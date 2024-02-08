@@ -1,5 +1,6 @@
 <?php
 
+use Codedor\FormArchitect\Filament\Resources\FormResource;
 use Codedor\FormArchitect\Livewire\RenderedForm;
 use Codedor\FormArchitect\Mail\SendFormSubmission;
 use Codedor\FormArchitect\Models\Form;
@@ -24,10 +25,12 @@ it('can build a form', function () {
 it('can save a form', function () {
     $form = createForm();
 
+    $fieldKeys = array_keys($form->fields[0]);
+
     livewire(RenderedForm::class, ['form' => $form])
         ->assertSee(['Name', 'E-mail'])
-        ->set('fields.name', 'John Doe')
-        ->set('fields.email', 'email@test.xyz')
+        ->set('fields.' . $fieldKeys[0], 'John Doe')
+        ->set('fields.' . $fieldKeys[1], 'email@test.xyz')
         ->call('saveData')
         ->assertHasNoErrors()
         ->assertStatus(200);
@@ -37,11 +40,11 @@ it('can save a form', function () {
         ->fields->toBe($form->fields)
         ->data->toHaveData([
             [
-                'key' => 'name',
+                'key' => $fieldKeys[0],
                 'value' => 'John Doe',
             ],
             [
-                'key' => 'email',
+                'key' => $fieldKeys[1],
                 'value' => 'email@test.xyz',
             ],
         ]);
@@ -55,10 +58,12 @@ it('can send an email', function () {
 
     $form = createForm();
 
+    $fieldKeys = array_keys($form->fields[0]);
+
     livewire(RenderedForm::class, ['form' => $form])
         ->assertSee(['Name', 'E-mail'])
-        ->set('fields.name', 'John Doe')
-        ->set('fields.email', 'email@test.xyz')
+        ->set('fields.' . $fieldKeys[0], 'John Doe')
+        ->set('fields.' . $fieldKeys[1], 'email@test.xyz')
         ->call('saveData')
         ->assertHasNoErrors()
         ->assertStatus(200);
@@ -67,7 +72,12 @@ it('can send an email', function () {
         return $mail->hasTo($form->getEmailsFor('to'))
             && $mail->hasFrom($form->getFromEmail())
             && $mail->hasSubject($form->email_subject)
-            && $mail->assertSeeInHtml($form->email_body);
+            && $mail->assertSeeInHtml($form->email_body)
+            && $mail->assertSeeInHtml('<td>Name</td>')
+            && $mail->assertSeeInHtml('<td>John Doe</td>')
+            && $mail->assertSeeInHtml('<td>E-mail</td>')
+            && $mail->assertSeeInHtml('<td>email@test.xyz</td>')
+            && $mail->assertSeeInHtml('<a href="' . FormResource::getUrl('submissions', ['record' => $form]) . '" target="_blank">View in CMS</a>');
     });
 });
 
@@ -79,10 +89,12 @@ it('will not send an email if disabled', function () {
 
     $form = createForm();
 
+    $fieldKeys = array_keys($form->fields[0]);
+
     livewire(RenderedForm::class, ['form' => $form])
         ->assertSee(['Name', 'E-mail'])
-        ->set('fields.name', 'John Doe')
-        ->set('fields.email', 'email@test.xyz')
+        ->set('fields.' . $fieldKeys[0], 'John Doe')
+        ->set('fields.' . $fieldKeys[1], 'email@test.xyz')
         ->call('saveData')
         ->assertHasNoErrors()
         ->assertStatus(200);
