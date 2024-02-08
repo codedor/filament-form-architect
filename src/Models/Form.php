@@ -2,10 +2,12 @@
 
 namespace Codedor\FormArchitect\Models;
 
+use Codedor\FilamentMailTemplates\Facades\MailTemplateFallbacks;
 use Codedor\FormArchitect\Database\Factories\FormFactory;
 use Codedor\LivewireForms\Fields\Row;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Spatie\Translatable\HasTranslations;
 
@@ -24,7 +26,8 @@ class Form extends Model
 
     public $fillable = [
         'name',
-        'email',
+        'email_to',
+        'email_from',
         'max_submissions',
         'fields',
         'completion_message',
@@ -44,6 +47,7 @@ class Form extends Model
 
     public $casts = [
         'fields' => 'json',
+        'email_to' => 'array',
     ];
 
     protected static function newFactory()
@@ -136,5 +140,29 @@ class Form extends Model
     public static function maxSubmissionsDisabled(): bool
     {
         return config('filament-form-architect.enable-submission-field') === false;
+    }
+
+    public static function adminEmailsDisabled(): bool
+    {
+        return config('filament-form-architect.enable-admin-mails', false) === false;
+    }
+
+    public function getEmailsFor(string $type): Collection
+    {
+        return $this->getAllEmails()
+            ->filter(fn ($email) => ($email['type'] ?? $email) === $type)
+            ->pluck('email');
+    }
+
+    public function getAllEmails(): Collection
+    {
+        return Collection::wrap(
+            ($this->email_to ?: null) ?? [MailTemplateFallbacks::getToMail()]
+        );
+    }
+
+    public function getFromEmail(): ?string
+    {
+        return $this->email_from ?? MailTemplateFallbacks::getFromMail();
     }
 }

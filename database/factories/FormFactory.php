@@ -13,9 +13,12 @@ class FormFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->email(),
+            'email_name' => fake()->name(),
+            'email_from' => fake()->email(),
             'max_submissions' => fake()->randomDigit(),
+            'email_to' => [],
             'fields' => [],
+            'completion_message' => [],
             'email_subject' => [],
             'email_body' => [],
             'online' => [],

@@ -2,10 +2,16 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
+use Codedor\FilamentMailTemplates\Facades\MailTemplateFallbacks;
+use Codedor\FilamentMailTemplates\Models\MailTemplate;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\FormArchitect\Models\Form as ModelsForm;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -33,9 +39,33 @@ class FormResource extends Resource
                             ->required()
                             ->maxLength(255),
 
-                        // Forms\Components\TextInput::make('email')
-                        //     ->email()
-                        //     ->maxLength(255),
+                        Forms\Components\TextInput::make('email_from')
+                            ->helperText(
+                                'If left empty, the sites default mail will be used: ' .
+                                MailTemplateFallbacks::getFromMail()
+                            )
+                            ->email()
+                            ->maxLength(255)
+                            ->hidden(ModelsForm::adminEmailsDisabled()),
+
+                        Repeater::make('email_to')
+                            ->helperText('If left empty, the sites default e-mail will be used.')
+                            ->label('Target e-mails')
+                            ->schema([
+                                Grid::make()->schema([
+                                    TextInput::make('email')
+                                        ->required(),
+
+                                    Select::make('type')
+                                        ->required()
+                                        ->options([
+                                            'to' => 'Normal',
+                                            'cc' => 'CC',
+                                            'bcc' => 'BCC',
+                                        ]),
+                                ]),
+                            ])
+                            ->hidden(ModelsForm::adminEmailsDisabled()),
 
                         Forms\Components\TextInput::make('max_submissions')
                             ->required()
@@ -47,11 +77,11 @@ class FormResource extends Resource
                         FormArchitectInput::make('fields'),
                     ])
                     ->translatableFields(fn () => [
-                        // Forms\Components\TextInput::make('email_subject'),
+                         Forms\Components\TextInput::make('email_subject')
+                             ->hidden(ModelsForm::adminEmailsDisabled()),
 
-                        // TiptapEditor::make('email_body'),
-
-                        // Forms\Components\Toggle::make('online'),
+                         TiptapEditor::make('email_body')
+                             ->hidden(ModelsForm::adminEmailsDisabled()),
 
                         TiptapEditor::make('completion_message')
                             ->label('Completion message')
@@ -61,6 +91,8 @@ class FormResource extends Resource
                             ->label('Maximum submissions message')
                             ->helperText('This message will be shown to the user when the maximum amount of submissions has been reached.')
                             ->hidden(ModelsForm::maxSubmissionsDisabled()),
+
+                         Forms\Components\Toggle::make('online'),
                     ]),
             ]);
     }

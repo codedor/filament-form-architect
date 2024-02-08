@@ -4,6 +4,7 @@ use Codedor\FormArchitect\Architect;
 
 return [
     'enable-submission-field' => false,
+    'enable-admin-mails' => false,
     'default-row-attributes' => [
         'divClass' => 'row',
     ],
