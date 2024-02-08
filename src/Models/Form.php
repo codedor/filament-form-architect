@@ -17,7 +17,10 @@ use Spatie\Translatable\HasTranslations;
  * @property array $fields
  * @property string $completion_message
  * @property int $max_submissions
- * @property string $max_submissions_message
+ * @property array $max_submissions_message
+ * @property array $email_subject
+ * @property array $email_body
+ * @property array $email_to
  */
 class Form extends Model
 {
