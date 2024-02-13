@@ -74,10 +74,10 @@ it('can send an email', function () {
             && $mail->hasFrom($form->getFromEmail())
             && $mail->hasSubject($form->email_subject)
             && $mail->assertSeeInHtml($form->email_body, false)
-            && $mail->assertSeeInHtml('<td>Name</td>', false)
-            && $mail->assertSeeInHtml('<td>John Doe</td>', false)
-            && $mail->assertSeeInHtml('<td>E-mail</td>', false)
-            && $mail->assertSeeInHtml('<td>email@test.xyz</td>', false)
+            && $mail->assertSeeInHtml('>Name</td>', false)
+            && $mail->assertSeeInHtml('>John Doe</td>', false)
+            && $mail->assertSeeInHtml('>E-mail</td>', false)
+            && $mail->assertSeeInHtml('>email@test.xyz</td>', false)
             && $mail->assertSeeInHtml('<a href="' . FormResource::getUrl('submissions', ['record' => $form]) . '" target="_blank">View in CMS</a>', false);
     });
 });
