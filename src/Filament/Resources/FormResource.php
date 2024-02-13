@@ -2,10 +2,15 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
+use Codedor\FilamentMailTemplates\Facades\MailTemplateFallbacks;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\FormArchitect\Models\Form as ModelsForm;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -28,14 +33,41 @@ class FormResource extends Resource
         return $form
             ->schema([
                 TranslatableTabs::make()
+                    ->icon('heroicon-o-check-circle')
                     ->defaultFields([
                         Forms\Components\TextInput::make('name')
+                            ->label('Form name')
                             ->required()
                             ->maxLength(255),
 
-                        // Forms\Components\TextInput::make('email')
-                        //     ->email()
-                        //     ->maxLength(255),
+                        Forms\Components\TextInput::make('email_from')
+                            ->label('Admin mail sender address')
+                            ->helperText(
+                                'If left empty, the sites default mail will be used: ' .
+                                MailTemplateFallbacks::getFromMail()
+                            )
+                            ->email()
+                            ->maxLength(255)
+                            ->hidden(ModelsForm::adminEmailsDisabled()),
+
+                        Repeater::make('email_to')
+                            ->helperText('If left empty, the sites default e-mail will be used.')
+                            ->label('Admin mail recipients')
+                            ->schema([
+                                Grid::make()->schema([
+                                    TextInput::make('email')
+                                        ->required(),
+
+                                    Select::make('type')
+                                        ->required()
+                                        ->options([
+                                            'to' => 'Normal',
+                                            'cc' => 'CC',
+                                            'bcc' => 'BCC',
+                                        ]),
+                                ]),
+                            ])
+                            ->hidden(ModelsForm::adminEmailsDisabled()),
 
                         Forms\Components\TextInput::make('max_submissions')
                             ->required()
@@ -47,14 +79,16 @@ class FormResource extends Resource
                         FormArchitectInput::make('fields'),
                     ])
                     ->translatableFields(fn () => [
-                        // Forms\Components\TextInput::make('email_subject'),
+                        Forms\Components\TextInput::make('email_subject')
+                            ->label('E-mail subject')
+                            ->hidden(ModelsForm::adminEmailsDisabled()),
 
-                        // TiptapEditor::make('email_body'),
-
-                        // Forms\Components\Toggle::make('online'),
+                        TiptapEditor::make('email_body')
+                            ->label('E-mail body')
+                            ->hidden(ModelsForm::adminEmailsDisabled()),
 
                         TiptapEditor::make('completion_message')
-                            ->label('Completion message')
+                            ->label('After submit completion message')
                             ->helperText('This message will be shown to the user after submitting the form.'),
 
                         TiptapEditor::make('max_submissions_message')
@@ -81,9 +115,6 @@ class FormResource extends Resource
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-
-                // Tables\Columns\TextColumn::make('email')
-                //     ->searchable(),
 
                 Tables\Columns\TextColumn::make('max_submissions')
                     ->numeric()

@@ -2,11 +2,13 @@
 
 namespace Codedor\FormArchitect\Livewire;
 
+use Codedor\FormArchitect\Mail\SendFormSubmission;
 use Codedor\FormArchitect\Models\Form;
 use Codedor\FormArchitect\Models\FormSubmission;
 use Codedor\LivewireForms\Fields\Button;
 use Codedor\LivewireForms\Form as LivewireFormsForm;
 use Codedor\LivewireForms\FormController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\HtmlString;
 
 class RenderedForm extends FormController
@@ -33,6 +35,7 @@ class RenderedForm extends FormController
     public function saveData()
     {
         $fields = $this->fields;
+
         unset($fields['locale']);
 
         $this->savedModel = $this->modelClass::create([
@@ -44,6 +47,13 @@ class RenderedForm extends FormController
                 'value' => $value,
             ])->values(),
         ]);
+
+        if (! Form::adminEmailsDisabled()) {
+            Mail::to($this->formModel->getEmailsFor('to'))
+                ->cc($this->formModel->getEmailsFor('cc'))
+                ->bcc($this->formModel->getEmailsFor('bcc'))
+                ->send(new SendFormSubmission($this->savedModel, $this->formModel));
+        }
     }
 
     public function successMessage()
