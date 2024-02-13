@@ -5,8 +5,10 @@ namespace Codedor\FormArchitect\Tests;
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
 use Codedor\FilamentArchitect\Providers\FilamentArchitectServiceProvider;
+use Codedor\FilamentMailTemplates\Providers\FilamentMailTemplatesServiceProvider;
 use Codedor\FormArchitect\Filament\FormArchitectPlugin;
 use Codedor\FormArchitect\Providers\FormArchitectServiceProvider;
+use Codedor\LivewireForms\LivewireFormsServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\FilamentServiceProvider as BaseFilamentServiceProvider;
@@ -53,6 +55,8 @@ class TestCase extends Orchestra
             TablesServiceProvider::class,
             FilamentDraftsServiceProvider::class,
             LaravelDraftsServiceProvider::class,
+            LivewireFormsServiceProvider::class,
+            FilamentMailTemplatesServiceProvider::class,
         ];
     }
 
