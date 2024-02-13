@@ -33,12 +33,15 @@ class FormResource extends Resource
         return $form
             ->schema([
                 TranslatableTabs::make()
+                    ->icon('heroicon-o-check-circle')
                     ->defaultFields([
                         Forms\Components\TextInput::make('name')
+                            ->label('Form name')
                             ->required()
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('email_from')
+                            ->label('Admin mail sender address')
                             ->helperText(
                                 'If left empty, the sites default mail will be used: ' .
                                 MailTemplateFallbacks::getFromMail()
@@ -49,7 +52,7 @@ class FormResource extends Resource
 
                         Repeater::make('email_to')
                             ->helperText('If left empty, the sites default e-mail will be used.')
-                            ->label('Target e-mails')
+                            ->label('Admin mail recipients')
                             ->schema([
                                 Grid::make()->schema([
                                     TextInput::make('email')
@@ -77,13 +80,15 @@ class FormResource extends Resource
                     ])
                     ->translatableFields(fn () => [
                         Forms\Components\TextInput::make('email_subject')
+                            ->label('E-mail subject')
                             ->hidden(ModelsForm::adminEmailsDisabled()),
 
                         TiptapEditor::make('email_body')
+                            ->label('E-mail body')
                             ->hidden(ModelsForm::adminEmailsDisabled()),
 
                         TiptapEditor::make('completion_message')
-                            ->label('Completion message')
+                            ->label('After submit completion message')
                             ->helperText('This message will be shown to the user after submitting the form.'),
 
                         TiptapEditor::make('max_submissions_message')

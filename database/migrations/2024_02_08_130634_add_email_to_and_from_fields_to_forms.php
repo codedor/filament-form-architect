@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::table('forms', function (Blueprint $table) {
             $table->dropColumn('email');
-            $table->string('email_to')->nullable();
-            $table->string('email_name')->nullable();
-            $table->json('email_from')->nullable();
+
+            $table->after('max_submissions_message', function (Blueprint $table) {
+                $table->json('email_to')->nullable();
+                $table->string('email_from')->nullable();
+            });
         });
     }
 
@@ -25,6 +27,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('forms', function (Blueprint $table) {
+            $table->text('email')->nullable();
+
             $table->dropColumn('email_to');
             $table->dropColumn('email_from');
         });

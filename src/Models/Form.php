@@ -14,6 +14,8 @@ use Spatie\Translatable\HasTranslations;
 /**
  * @property int $id
  * @property Carbon $created_at
+ * @property array $email_to
+ * @property string $email_from
  * @property array $fields
  * @property string $completion_message
  * @property int $max_submissions
