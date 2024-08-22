@@ -24,8 +24,7 @@ class SendFormSubmission extends Mailable
     public function __construct(
         public FormSubmission $formSubmission,
         public Form $form
-    ) {
-    }
+    ) {}
 
     /**
      * Get the message envelope.

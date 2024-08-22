@@ -31,9 +31,7 @@ class FormArchitectPlugin implements Plugin
         }
     }
 
-    public function boot(Panel $panel): void
-    {
-    }
+    public function boot(Panel $panel): void {}
 
     public function formResource(bool $condition = true): static
     {
