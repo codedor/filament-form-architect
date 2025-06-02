@@ -7,6 +7,7 @@ use Codedor\FormArchitect\Database\Factories\FormFactory;
 use Codedor\LivewireForms\Fields\Row;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Spatie\Translatable\HasTranslations;
@@ -22,7 +23,6 @@ use Spatie\Translatable\HasTranslations;
  * @property array $max_submissions_message
  * @property array $email_subject
  * @property array $email_body
- * @property array $email_to
  */
 class Form extends Model
 {
