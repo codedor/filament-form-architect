@@ -2,15 +2,15 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use Codedor\LivewireForms\Fields\Field;
-use Codedor\LivewireForms\Fields\TextField;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
-use FilamentTiptapEditor\TiptapEditor;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\HtmlString;
+use Wotz\LivewireForms\Fields\Field;
+use Wotz\LivewireForms\Fields\TextField;
+use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class TextInputBlock extends BaseFormBlock
 {
@@ -36,7 +36,7 @@ class TextInputBlock extends BaseFormBlock
     {
         return [
             TranslatableTabs::make()
-                ->persistInQueryString(false)
+                ->persistTabInQueryString(null)
                 ->defaultFields([
                     Select::make('type')
                         ->selectablePlaceholder(false)
@@ -56,7 +56,7 @@ class TextInputBlock extends BaseFormBlock
                     TextInput::make('label')
                         ->required(fn (Get $get) => $get('online')),
 
-                    TiptapEditor::make('gdpr_notice')
+                    RichEditor::make('gdpr_notice')
                         ->label('GDPR Notice')
                         ->helperText('This will explain why you need this information and how you will use it.'),
 

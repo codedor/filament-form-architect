@@ -2,15 +2,15 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use Codedor\LivewireForms\Fields\CheckboxField;
-use Codedor\LivewireForms\Fields\Field;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
 use Filament\Infolists\Components\TextEntry;
-use FilamentTiptapEditor\TiptapEditor;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\HtmlString;
+use Wotz\LivewireForms\Fields\CheckboxField;
+use Wotz\LivewireForms\Fields\Field;
+use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class CheckboxBlock extends BaseFormBlock
 {
@@ -44,14 +44,14 @@ class CheckboxBlock extends BaseFormBlock
     {
         return [
             TranslatableTabs::make()
-                ->persistInQueryString(false)
+                ->persistTabInQueryString(null)
                 ->defaultFields([
                     Toggle::make('is_required'),
                 ])
                 ->translatableFields(fn () => [
-                    TiptapEditor::make('label')
+                    RichEditor::make('label')
                         ->required(fn (Get $get) => $get('online'))
-                        ->profile(config('filament-form-architect.checkbox-tiptap-profile', 'minimal')),
+                        ->toolbarButtons(config('filament-form-architect.checkbox-toolbar-buttons', ['bold', 'italic', 'link'])),
 
                     TextInput::make('gdpr_notice')
                         ->label('GDPR Notice')

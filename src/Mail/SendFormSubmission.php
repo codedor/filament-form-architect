@@ -2,17 +2,18 @@
 
 namespace Codedor\FormArchitect\Mail;
 
-use Codedor\FilamentMailTemplates\Models\MailTemplate;
 use Codedor\FormArchitect\Filament\Resources\FormResource;
 use Codedor\FormArchitect\Models\Form;
 use Codedor\FormArchitect\Models\FormSubmission;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\HtmlString;
+use Wotz\FilamentMailTemplates\Models\MailTemplate;
 
 class SendFormSubmission extends Mailable
 {
@@ -62,7 +63,7 @@ class SendFormSubmission extends Mailable
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array<int, Attachment>
      */
     public function attachments(): array
     {

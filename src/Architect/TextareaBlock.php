@@ -2,13 +2,13 @@
 
 namespace Codedor\FormArchitect\Architect;
 
-use Codedor\LivewireForms\Fields\Field;
-use Codedor\LivewireForms\Fields\TextareaField;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\HtmlString;
+use Wotz\LivewireForms\Fields\Field;
+use Wotz\LivewireForms\Fields\TextareaField;
+use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class TextareaBlock extends BaseFormBlock
 {
@@ -43,7 +43,7 @@ class TextareaBlock extends BaseFormBlock
     {
         return [
             TranslatableTabs::make()
-                ->persistInQueryString(false)
+                ->persistTabInQueryString(null)
                 ->defaultFields([
                     TextInput::make('max')
                         ->label('Maximum allowed characters')

@@ -2,45 +2,47 @@
 
 namespace Codedor\FormArchitect\Filament\Resources;
 
-use Codedor\FilamentMailTemplates\Facades\MailTemplateFallbacks;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
+use Codedor\FormArchitect\Models\Form;
 use Codedor\FormArchitect\Models\Form as ModelsForm;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
-use Filament\Forms;
-use Filament\Forms\Components\Grid;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\TiptapEditor;
+use Wotz\FilamentMailTemplates\Facades\MailTemplateFallbacks;
+use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class FormResource extends Resource
 {
-    protected static ?string $model = \Codedor\FormArchitect\Models\Form::class;
+    protected static ?string $model = Form::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-pencil-square';
 
     protected static ?string $modelLabel = 'Custom Form';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TranslatableTabs::make()
                     ->icon('heroicon-o-check-circle')
                     ->defaultFields([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Form name')
                             ->required()
                             ->maxLength(255),
 
-                        Forms\Components\TextInput::make('email_from')
+                        TextInput::make('email_from')
                             ->label('Admin mail sender address')
                             ->helperText(
                                 'If left empty, the sites default mail will be used: ' .
@@ -69,7 +71,7 @@ class FormResource extends Resource
                             ])
                             ->hidden(ModelsForm::adminEmailsDisabled()),
 
-                        Forms\Components\TextInput::make('max_submissions')
+                        TextInput::make('max_submissions')
                             ->required()
                             ->numeric()
                             ->default(0)
@@ -79,19 +81,19 @@ class FormResource extends Resource
                         FormArchitectInput::make('fields'),
                     ])
                     ->translatableFields(fn () => [
-                        Forms\Components\TextInput::make('email_subject')
+                        TextInput::make('email_subject')
                             ->label('E-mail subject')
                             ->hidden(ModelsForm::adminEmailsDisabled()),
 
-                        TiptapEditor::make('email_body')
+                        RichEditor::make('email_body')
                             ->label('E-mail body')
                             ->hidden(ModelsForm::adminEmailsDisabled()),
 
-                        TiptapEditor::make('completion_message')
+                        RichEditor::make('completion_message')
                             ->label('After submit completion message')
                             ->helperText('This message will be shown to the user after submitting the form.'),
 
-                        TiptapEditor::make('max_submissions_message')
+                        RichEditor::make('max_submissions_message')
                             ->label('Maximum submissions message')
                             ->helperText('This message will be shown to the user when the maximum amount of submissions has been reached.')
                             ->hidden(ModelsForm::maxSubmissionsDisabled()),
@@ -125,20 +127,20 @@ class FormResource extends Resource
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->submissions()->count()),
             ])
-            ->actions([
-                Tables\Actions\Action::make('submissions')
+            ->recordActions([
+                Action::make('submissions')
                     ->url(fn ($record): string => self::getUrl('submissions', [$record]))
                     ->color('gray')
                     ->icon('heroicon-s-eye'),
 
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ]);
     }
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return $infolist->schema([
+        return $schema->components([
             Section::make()->schema([
                 TextEntry::make('name')->label('Form'),
 

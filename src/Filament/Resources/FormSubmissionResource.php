@@ -4,22 +4,24 @@ namespace Codedor\FormArchitect\Filament\Resources;
 
 use Codedor\FormArchitect\Filament\Actions\ExportFormSubmissions;
 use Codedor\FormArchitect\Models\FormSubmission;
-use Filament\Infolists\Components\Section;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
 class FormSubmissionResource extends Resource
 {
-    protected static ?string $model = \Codedor\FormArchitect\Models\FormSubmission::class;
+    protected static ?string $model = FormSubmission::class;
 
     protected static bool $shouldRegisterNavigation = false;
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return $infolist->schema([
+        return $schema->components([
             TextEntry::make('created_at')
                 ->dateTime(),
 
@@ -43,12 +45,12 @@ class FormSubmissionResource extends Resource
                     ->sortable(),
             ])
             ->defaultSort('id', 'desc')
-            ->actions([
-                Tables\Actions\ViewAction::make(),
+            ->recordActions([
+                ViewAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 ExportFormSubmissions::make(),
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ]);
     }
 
