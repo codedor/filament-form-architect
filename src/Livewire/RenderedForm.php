@@ -1,12 +1,12 @@
 <?php
 
-namespace Codedor\FormArchitect\Livewire;
+namespace Wotz\FormArchitect\Livewire;
 
-use Codedor\FormArchitect\Mail\SendFormSubmission;
-use Codedor\FormArchitect\Models\Form;
-use Codedor\FormArchitect\Models\FormSubmission;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\HtmlString;
+use Wotz\FormArchitect\Mail\SendFormSubmission;
+use Wotz\FormArchitect\Models\Form;
+use Wotz\FormArchitect\Models\FormSubmission;
 use Wotz\LivewireForms\Fields\Button;
 use Wotz\LivewireForms\Form as LivewireFormsForm;
 use Wotz\LivewireForms\FormController;

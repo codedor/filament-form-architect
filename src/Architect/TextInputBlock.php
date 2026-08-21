@@ -1,6 +1,6 @@
 <?php
 
-namespace Codedor\FormArchitect\Architect;
+namespace Wotz\FormArchitect\Architect;
 
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;

@@ -1,12 +1,12 @@
 {
-    "name": "codedor/filament-form-architect",
+    "name": "wotz/filament-form-architect",
     "description": "Build beautiful forms together with our Architect package",
     "keywords": [
-        "codedor",
+        "who owns the zebra",
         "laravel",
         "filament-form-architect"
     ],
-    "homepage": "https://github.com/codedor/filament-form-architect",
+    "homepage": "https://github.com/wotz/filament-form-architect",
     "license": "MIT",
     "require": {
         "php": "^8.3",
@@ -36,19 +36,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Codedor\\FormArchitect\\": "src",
-            "Codedor\\FormArchitect\\Database\\Factories\\": "database/factories"
+            "Wotz\\FormArchitect\\": "src",
+            "Wotz\\FormArchitect\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Codedor\\FormArchitect\\Tests\\": "tests"
+            "Wotz\\FormArchitect\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Codedor\\FormArchitect\\Providers\\FormArchitectServiceProvider"
+                "Wotz\\FormArchitect\\Providers\\FormArchitectServiceProvider"
             ]
         }
     },

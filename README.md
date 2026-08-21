@@ -9,7 +9,7 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 You can install the package via composer:
 
 ```bash
-composer require codedor/filament-form-architect
+composer require wotz/filament-form-architect
 ```
 
 You can publish and run the migrations with:
@@ -30,8 +30,8 @@ This is the contents of the published config file:
 ```php
 return [
     'default-blocks' => [
-        \Codedor\FormArchitect\Architect\RadioButtonBlock::class,
-        \Codedor\FormArchitect\Architect\TextInputBlock::class,
+        \Wotz\FormArchitect\Architect\RadioButtonBlock::class,
+        \Wotz\FormArchitect\Architect\TextInputBlock::class,
     ],
 ];
 ```
@@ -66,7 +66,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-If you discover any security-related issues, please email info@codedor.be instead of using the issue tracker.
+If you discover any security-related issues, please email info@whoownsthezebra.be instead of using the issue tracker.
 
 ## License
 

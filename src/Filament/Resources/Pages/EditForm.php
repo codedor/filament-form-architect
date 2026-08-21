@@ -1,10 +1,10 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Resources\Pages;
+namespace Wotz\FormArchitect\Filament\Resources\Pages;
 
-use Codedor\FormArchitect\Filament\Resources\FormResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Wotz\FormArchitect\Filament\Resources\FormResource;
 
 class EditForm extends EditRecord
 {

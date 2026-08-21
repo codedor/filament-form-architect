@@ -1,6 +1,6 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Fields;
+namespace Wotz\FormArchitect\Filament\Fields;
 
 use Closure;
 use Wotz\FilamentArchitect\Filament\Fields\ArchitectInput;

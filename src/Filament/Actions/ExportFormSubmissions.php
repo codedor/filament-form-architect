@@ -1,13 +1,13 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Actions;
+namespace Wotz\FormArchitect\Filament\Actions;
 
-use Codedor\FormArchitect\Exports\FormSubmissionsExport;
 use Filament\Actions\BulkAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
+use Wotz\FormArchitect\Exports\FormSubmissionsExport;
 
 class ExportFormSubmissions extends BulkAction
 {

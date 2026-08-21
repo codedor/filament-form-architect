@@ -1,9 +1,7 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Resources;
+namespace Wotz\FormArchitect\Filament\Resources;
 
-use Codedor\FormArchitect\Filament\Actions\ExportFormSubmissions;
-use Codedor\FormArchitect\Models\FormSubmission;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Infolists\Components\TextEntry;
@@ -12,6 +10,8 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Wotz\FormArchitect\Filament\Actions\ExportFormSubmissions;
+use Wotz\FormArchitect\Models\FormSubmission;
 
 class FormSubmissionResource extends Resource
 {

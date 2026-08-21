@@ -15,7 +15,7 @@
          backupStaticProperties="false"
 >
     <testsuites>
-        <testsuite name="Codedor Test Suite">
+        <testsuite name="Wotz Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

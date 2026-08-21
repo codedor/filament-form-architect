@@ -1,11 +1,9 @@
 <?php
 
-namespace Codedor\FormArchitect\Tests;
+namespace Wotz\FormArchitect\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
-use Codedor\FormArchitect\Filament\FormArchitectPlugin;
-use Codedor\FormArchitect\Providers\FormArchitectServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\Facades\Filament;
 use Filament\FilamentServiceProvider;
@@ -22,6 +20,8 @@ use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Wotz\FilamentArchitect\Providers\FilamentArchitectServiceProvider;
 use Wotz\FilamentMailTemplates\Providers\FilamentMailTemplatesServiceProvider;
+use Wotz\FormArchitect\Filament\FormArchitectPlugin;
+use Wotz\FormArchitect\Providers\FormArchitectServiceProvider;
 use Wotz\LivewireForms\LivewireFormsServiceProvider;
 
 class TestCase extends Orchestra
@@ -31,7 +31,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Codedor\\FormArchitect\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Wotz\\FormArchitect\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 

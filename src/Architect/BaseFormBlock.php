@@ -1,6 +1,6 @@
 <?php
 
-namespace Codedor\FormArchitect\Architect;
+namespace Wotz\FormArchitect\Architect;
 
 use Wotz\FilamentArchitect\Filament\Architect\BaseBlock;
 

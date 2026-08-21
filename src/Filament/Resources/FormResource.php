@@ -1,10 +1,7 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Resources;
+namespace Wotz\FormArchitect\Filament\Resources;
 
-use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
-use Codedor\FormArchitect\Models\Form;
-use Codedor\FormArchitect\Models\Form as ModelsForm;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -20,6 +17,9 @@ use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Wotz\FilamentMailTemplates\Facades\MailTemplateFallbacks;
+use Wotz\FormArchitect\Filament\Fields\FormArchitectInput;
+use Wotz\FormArchitect\Models\Form;
+use Wotz\FormArchitect\Models\Form as ModelsForm;
 use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class FormResource extends Resource

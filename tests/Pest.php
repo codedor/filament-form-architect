@@ -1,7 +1,7 @@
 <?php
 
-use Codedor\FormArchitect\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Wotz\FormArchitect\Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class)->in('Feature');
 

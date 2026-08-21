@@ -1,11 +1,11 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Resources\Pages;
+namespace Wotz\FormArchitect\Filament\Resources\Pages;
 
-use Codedor\FormArchitect\Filament\Resources\FormSubmissionResource;
-use Codedor\FormArchitect\Models\Form;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
+use Wotz\FormArchitect\Filament\Resources\FormSubmissionResource;
+use Wotz\FormArchitect\Models\Form;
 
 class ListFormSubmissions extends ListRecords
 {

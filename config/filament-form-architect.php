@@ -1,6 +1,6 @@
 <?php
 
-use Codedor\FormArchitect\Architect;
+use Wotz\FormArchitect\Architect;
 
 return [
     'enable-submission-field' => false,

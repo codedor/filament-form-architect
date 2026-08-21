@@ -1,9 +1,9 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Resources\Pages;
+namespace Wotz\FormArchitect\Filament\Resources\Pages;
 
-use Codedor\FormArchitect\Filament\Resources\FormResource;
 use Filament\Resources\Pages\CreateRecord;
+use Wotz\FormArchitect\Filament\Resources\FormResource;
 
 class CreateForm extends CreateRecord
 {
