@@ -1,7 +1,7 @@
 <?php
 
-use Codedor\FormArchitect\Filament\Resources\FormResource;
-use Codedor\FormArchitect\Tests\Fixtures\Models\User;
+use Wotz\FormArchitect\Filament\Resources\FormResource;
+use Wotz\FormArchitect\Tests\Fixtures\Models\User;
 
 beforeEach(function () {
     $this->actingAs(User::factory()->create());

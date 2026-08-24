@@ -1,6 +1,6 @@
 <?php
 
-namespace Codedor\FormArchitect\Models;
+namespace Wotz\FormArchitect\Models;
 
 use Carbon\Carbon;
 use Filament\Infolists\Components\TextEntry;

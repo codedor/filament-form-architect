@@ -1,15 +1,15 @@
 <?php
 
-namespace Codedor\FormArchitect\Livewire;
+namespace Wotz\FormArchitect\Livewire;
 
-use Codedor\FormArchitect\Mail\SendFormSubmission;
-use Codedor\FormArchitect\Models\Form;
-use Codedor\FormArchitect\Models\FormSubmission;
-use Codedor\LivewireForms\Fields\Button;
-use Codedor\LivewireForms\Form as LivewireFormsForm;
-use Codedor\LivewireForms\FormController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\HtmlString;
+use Wotz\FormArchitect\Mail\SendFormSubmission;
+use Wotz\FormArchitect\Models\Form;
+use Wotz\FormArchitect\Models\FormSubmission;
+use Wotz\LivewireForms\Fields\Button;
+use Wotz\LivewireForms\Form as LivewireFormsForm;
+use Wotz\LivewireForms\FormController;
 
 class RenderedForm extends FormController
 {
@@ -80,13 +80,17 @@ class RenderedForm extends FormController
     {
         return new class($this->formModel) extends LivewireFormsForm
         {
-            public function __construct(public Form $formModel)
+            public function __construct(public ?Form $formModel)
             {
                 parent::__construct();
             }
 
             public function fields()
             {
+                if (! $this->formModel) {
+                    return [];
+                }
+
                 return [
                     ...$this->formModel->getLivewireFormFields(),
                     Button::make(__('form.submit')),

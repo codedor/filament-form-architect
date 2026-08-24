@@ -2,14 +2,14 @@
 
 ## Introduction
 
-Form Architect allows you to build forms in your Filament panel using the [codedor/filament-architect](https://github.com/codedor/filament-architect) package.
+Form Architect allows you to build forms in your Filament panel using the [codedor/filament-architect](https://github.com/wotzebra/filament-architect) package.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require codedor/filament-form-architect
+composer require wotz/filament-form-architect
 ```
 
 You can publish (optional) and run the migrations with:
@@ -40,7 +40,7 @@ public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            \Codedor\FormArchitect\Filament\FormArchitectPlugin::make(),
+            \Wotz\FormArchitect\Filament\FormArchitectPlugin::make(),
         ]);
     }
 
@@ -48,7 +48,7 @@ public function panel(Panel $panel): Panel
 
 ## Creating a block/field
 
-See our [Architect](https://github.com/codedor/filament-architect) package for how to create new blocks.
+See our [Architect](https://github.com/wotzebra/filament-architect) package for how to create new blocks.
 
 The only difference here is that we have a `toLivewireForm` function instead of a `render` function, which returns the Livewire form component.
 
@@ -87,7 +87,7 @@ public static function toExcelExport(mixed $value): string
 This package has a couple of config values:
 
 ```php
-use Codedor\FormArchitect\Architect;
+use Wotz\FormArchitect\Architect;
 
 return [
     'enable-submission-field' => false,
@@ -118,7 +118,7 @@ This configures the default attributes for the row block. For example the `divCl
 
 ### default-blocks
 
-This configures which blocks will be used in the form builder, see our [Architect](https://github.com/codedor/filament-architect) package for more information about blocks.
+This configures which blocks will be used in the form builder, see our [Architect](https://github.com/wotzebra/filament-architect) package for more information about blocks.
 
 A slight difference with the normal Architect blocks is that we can pass an array per block, which will be used as the default attributes for that block. For example:
 
@@ -132,7 +132,7 @@ A slight difference with the normal Architect blocks is that we can pass an arra
 ],
 ```
 
-See our [Livewire Forms](https://github.com/codedor/laravel-livewire-forms) package for an overview of available attributes.
+See our [Livewire Forms](https://github.com/wotzebra/laravel-livewire-forms) package for an overview of available attributes.
 
 ### checkbox-tiptap-profile
 

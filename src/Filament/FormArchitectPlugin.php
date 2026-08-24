@@ -1,11 +1,11 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament;
+namespace Wotz\FormArchitect\Filament;
 
-use Codedor\FormArchitect\Filament\Resources\FormResource;
-use Codedor\FormArchitect\Filament\Resources\FormSubmissionResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Wotz\FormArchitect\Filament\Resources\FormResource;
+use Wotz\FormArchitect\Filament\Resources\FormSubmissionResource;
 
 class FormArchitectPlugin implements Plugin
 {

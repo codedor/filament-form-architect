@@ -1,8 +1,8 @@
 <?php
 
-use Codedor\FormArchitect\Filament\Resources\Pages\CreateForm;
-use Codedor\FormArchitect\Models\Form;
-use Codedor\FormArchitect\Tests\Fixtures\Models\User;
+use Wotz\FormArchitect\Filament\Resources\Pages\CreateForm;
+use Wotz\FormArchitect\Models\Form;
+use Wotz\FormArchitect\Tests\Fixtures\Models\User;
 
 use function Pest\Livewire\livewire;
 

@@ -1,54 +1,54 @@
 {
-    "name": "codedor/filament-form-architect",
+    "name": "wotz/filament-form-architect",
     "description": "Build beautiful forms together with our Architect package",
     "keywords": [
-        "codedor",
+        "who owns the zebra",
         "laravel",
         "filament-form-architect"
     ],
-    "homepage": "https://github.com/codedor/filament-form-architect",
+    "homepage": "https://github.com/wotz/filament-form-architect",
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "awcodes/filament-tiptap-editor": "^3.2",
-        "codedor/filament-architect": "^1.0|^2.0",
-        "codedor/filament-mail-templates": "^1.1",
-        "codedor/filament-translatable-strings": "^1.0",
-        "codedor/laravel-livewire-forms": "^4.0",
-        "codedor/laravel-locale-collection": "^1.1",
-        "filament/filament": "^3.1",
-        "guava/filament-drafts": "^2.1",
-        "maatwebsite/excel": "^3.1",
-        "illuminate/contracts": "^10.0|^11.0",
-        "spatie/laravel-package-tools": "^1.12"
+        "php": "^8.3",
+        "filament/filament": "^4.0|^5.0",
+        "illuminate/contracts": "^12.0|^13.0",
+        "maatwebsite/excel": "^4.0",
+        "spatie/laravel-package-tools": "^1.12",
+        "wotz/filament-architect": "^3.0",
+        "wotz/filament-mail-templates": "^2.0",
+        "wotz/filament-media-library": "^4.0",
+        "wotz/filament-translatable-strings": "^3.0",
+        "wotz/filament-translatable-tabs": "^3.0",
+        "wotz/laravel-livewire-forms": "^5.0",
+        "wotz/laravel-locale-collection": "^2.0"
     },
     "require-dev": {
+        "larastan/larastan": "^3.0",
         "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^7.0|^8.0",
-        "larastan/larastan": "^2.0",
-        "orchestra/testbench": "^8.0|^9.0",
-        "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "pestphp/pest-plugin-livewire": "^2.1",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0"
+        "nunomaduro/collision": "^8.0",
+        "orchestra/testbench": "^10.0|^11.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-livewire": "^4.0",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "Codedor\\FormArchitect\\": "src",
-            "Codedor\\FormArchitect\\Database\\Factories\\": "database/factories"
+            "Wotz\\FormArchitect\\": "src",
+            "Wotz\\FormArchitect\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Codedor\\FormArchitect\\Tests\\": "tests"
+            "Wotz\\FormArchitect\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Codedor\\FormArchitect\\Providers\\FormArchitectServiceProvider"
+                "Wotz\\FormArchitect\\Providers\\FormArchitectServiceProvider"
             ]
         }
     },

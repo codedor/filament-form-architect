@@ -1,12 +1,12 @@
 <?php
 
-namespace Codedor\FormArchitect\Tests\Fixtures\Models;
+namespace Wotz\FormArchitect\Tests\Fixtures\Models;
 
-use Codedor\FormArchitect\Tests\Fixtures\Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Wotz\FormArchitect\Tests\Fixtures\Database\Factories\UserFactory;
 
 class User extends Authenticatable implements FilamentUser
 {

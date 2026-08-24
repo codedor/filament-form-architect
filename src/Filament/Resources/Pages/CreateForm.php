@@ -1,14 +1,11 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Resources\Pages;
+namespace Wotz\FormArchitect\Filament\Resources\Pages;
 
-use Codedor\FormArchitect\Filament\Resources\FormResource;
-use Codedor\TranslatableTabs\Resources\Traits\HasTranslations;
 use Filament\Resources\Pages\CreateRecord;
+use Wotz\FormArchitect\Filament\Resources\FormResource;
 
 class CreateForm extends CreateRecord
 {
-    use HasTranslations;
-
     protected static string $resource = FormResource::class;
 }
