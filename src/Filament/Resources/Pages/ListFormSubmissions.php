@@ -11,15 +11,18 @@ class ListFormSubmissions extends ListRecords
 {
     protected static string $resource = FormSubmissionResource::class;
 
-    public Form $record;
+    public ?Form $record = null;
 
     public function mount(?Form $record = null): void
     {
+        $this->record = $record;
+
         parent::mount();
     }
 
     public function getFilteredTableQuery(): Builder
     {
-        return parent::getFilteredTableQuery()->where('form_id', $this->record->id);
+        return parent::getFilteredTableQuery()
+            ->when($this->record, fn (Builder $query) => $query->where('form_id', $this->record->id));
     }
 }
