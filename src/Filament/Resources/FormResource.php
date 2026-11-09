@@ -6,7 +6,6 @@ use Codedor\FilamentMailTemplates\Facades\MailTemplateFallbacks;
 use Codedor\FormArchitect\Filament\Fields\FormArchitectInput;
 use Codedor\FormArchitect\Models\Form as ModelsForm;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
-use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -22,7 +21,7 @@ use FilamentTiptapEditor\TiptapEditor;
 
 class FormResource extends Resource
 {
-    protected static ?string $model = \Codedor\FormArchitect\Models\Form::class;
+    protected static ?string $model = ModelsForm::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
@@ -35,12 +34,12 @@ class FormResource extends Resource
                 TranslatableTabs::make()
                     ->icon('heroicon-o-check-circle')
                     ->defaultFields([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Form name')
                             ->required()
                             ->maxLength(255),
 
-                        Forms\Components\TextInput::make('email_from')
+                        TextInput::make('email_from')
                             ->label('Admin mail sender address')
                             ->helperText(
                                 'If left empty, the sites default mail will be used: ' .
@@ -69,7 +68,7 @@ class FormResource extends Resource
                             ])
                             ->hidden(ModelsForm::adminEmailsDisabled()),
 
-                        Forms\Components\TextInput::make('max_submissions')
+                        TextInput::make('max_submissions')
                             ->required()
                             ->numeric()
                             ->default(0)
@@ -79,7 +78,7 @@ class FormResource extends Resource
                         FormArchitectInput::make('fields'),
                     ])
                     ->translatableFields(fn () => [
-                        Forms\Components\TextInput::make('email_subject')
+                        TextInput::make('email_subject')
                             ->label('E-mail subject')
                             ->hidden(ModelsForm::adminEmailsDisabled()),
 

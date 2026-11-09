@@ -10,10 +10,12 @@ use Codedor\FormArchitect\Filament\FormArchitectPlugin;
 use Codedor\FormArchitect\Providers\FormArchitectServiceProvider;
 use Codedor\LivewireForms\LivewireFormsServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
+use Filament\Facades\Filament;
 use Filament\FilamentServiceProvider;
 use Filament\FilamentServiceProvider as BaseFilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Notifications\NotificationsServiceProvider;
+use Filament\Panel;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
@@ -64,13 +66,13 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        $panel = new \Filament\Panel;
+        $panel = new Panel;
         $panel
             ->id('resource-test')
             ->default(true)
             ->plugin(FormArchitectPlugin::make());
 
-        \Filament\Facades\Filament::registerPanel($panel);
+        Filament::registerPanel($panel);
     }
 
     protected function defineDatabaseMigrations(): void
