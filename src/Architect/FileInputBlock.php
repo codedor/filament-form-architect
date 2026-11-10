@@ -1,18 +1,18 @@
 <?php
 
-namespace Codedor\FormArchitect\Architect;
+namespace Wotz\FormArchitect\Architect;
 
-use Codedor\LivewireForms\Fields\Field;
-use Codedor\LivewireForms\Fields\FileField;
-use Codedor\LivewireForms\Fields\MultiFileField;
-use Codedor\MediaLibrary\Models\Attachment;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
 use Filament\Infolists\Components\ViewEntry;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
+use Wotz\LivewireForms\Fields\Field;
+use Wotz\LivewireForms\Fields\FileField;
+use Wotz\LivewireForms\Fields\MultiFileField;
+use Wotz\MediaLibrary\Models\Attachment;
+use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class FileInputBlock extends BaseFormBlock
 {
@@ -55,7 +55,7 @@ class FileInputBlock extends BaseFormBlock
     {
         return [
             TranslatableTabs::make()
-                ->persistInQueryString(false)
+                ->persistTabInQueryString(null)
                 ->defaultFields([
                     Toggle::make('multiple')
                         ->helperText('Allow multiple files to be uploaded'),

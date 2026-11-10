@@ -1,11 +1,11 @@
 <?php
 
-namespace Codedor\FormArchitect\Providers;
+namespace Wotz\FormArchitect\Providers;
 
-use Codedor\FormArchitect\Livewire\RenderedForm;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Wotz\FormArchitect\Livewire\RenderedForm;
 
 class FormArchitectServiceProvider extends PackageServiceProvider
 {

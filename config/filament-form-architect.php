@@ -1,6 +1,6 @@
 <?php
 
-use Codedor\FormArchitect\Architect;
+use Wotz\FormArchitect\Architect;
 
 return [
     'enable-submission-field' => false,
@@ -18,5 +18,5 @@ return [
         Architect\TextInputBlock::class => [],
         Architect\TitleBlock::class => [],
     ],
-    'checkbox-tiptap-profile' => 'minimal',
+    'checkbox-toolbar-buttons' => ['bold', 'italic', 'link'],
 ];

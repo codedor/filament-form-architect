@@ -1,6 +1,6 @@
 <?php
 
-namespace Codedor\FormArchitect\Database\Seeders;
+namespace Wotz\FormArchitect\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 

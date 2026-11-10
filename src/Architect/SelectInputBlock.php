@@ -1,15 +1,15 @@
 <?php
 
-namespace Codedor\FormArchitect\Architect;
+namespace Wotz\FormArchitect\Architect;
 
-use Codedor\LivewireForms\Fields\Field;
-use Codedor\LivewireForms\Fields\SelectField;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\HtmlString;
+use Wotz\LivewireForms\Fields\Field;
+use Wotz\LivewireForms\Fields\SelectField;
+use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class SelectInputBlock extends BaseFormBlock
 {
@@ -38,7 +38,7 @@ class SelectInputBlock extends BaseFormBlock
     {
         return [
             TranslatableTabs::make()
-                ->persistInQueryString(false)
+                ->persistTabInQueryString(null)
                 ->defaultFields([
                     Toggle::make('is_required'),
                 ])

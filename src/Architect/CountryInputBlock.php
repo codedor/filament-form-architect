@@ -1,16 +1,16 @@
 <?php
 
-namespace Codedor\FormArchitect\Architect;
+namespace Wotz\FormArchitect\Architect;
 
-use Codedor\LivewireForms\Fields\CountryField;
-use Codedor\LivewireForms\Fields\Field;
-use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\HtmlString;
+use Wotz\LivewireForms\Fields\CountryField;
+use Wotz\LivewireForms\Fields\Field;
+use Wotz\TranslatableTabs\Forms\TranslatableTabs;
 
 class CountryInputBlock extends BaseFormBlock
 {
@@ -46,7 +46,7 @@ class CountryInputBlock extends BaseFormBlock
     {
         return [
             TranslatableTabs::make()
-                ->persistInQueryString(false)
+                ->persistTabInQueryString(null)
                 ->defaultFields([
                     Select::make('default_value')
                         ->label('Default selected country')

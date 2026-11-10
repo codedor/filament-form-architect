@@ -1,9 +1,9 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Fields;
+namespace Wotz\FormArchitect\Filament\Fields;
 
 use Closure;
-use Codedor\FilamentArchitect\Filament\Fields\ArchitectInput;
+use Wotz\FilamentArchitect\Filament\Fields\ArchitectInput;
 
 class FormArchitectInput extends ArchitectInput
 {

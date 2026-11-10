@@ -45,7 +45,7 @@ Some things to consider before submitting an issue
 
 ## Coding style
 
-See our [guidelines](https://guidelines.codedor.be/coding-standards/php).
+See our [guidelines](https://guidelines.whoownsthezebra.be/coding-standards/php).
 
 ### Laravel Pint
 

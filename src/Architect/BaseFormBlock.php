@@ -1,8 +1,8 @@
 <?php
 
-namespace Codedor\FormArchitect\Architect;
+namespace Wotz\FormArchitect\Architect;
 
-use Codedor\FilamentArchitect\Filament\Architect\BaseBlock;
+use Wotz\FilamentArchitect\Filament\Architect\BaseBlock;
 
 class BaseFormBlock extends BaseBlock
 {

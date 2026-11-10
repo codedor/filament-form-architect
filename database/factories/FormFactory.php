@@ -1,9 +1,9 @@
 <?php
 
-namespace Codedor\FormArchitect\Database\Factories;
+namespace Wotz\FormArchitect\Database\Factories;
 
-use Codedor\FormArchitect\Models\Form;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Wotz\FormArchitect\Models\Form;
 
 class FormFactory extends Factory
 {

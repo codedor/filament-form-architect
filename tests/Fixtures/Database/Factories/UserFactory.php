@@ -1,10 +1,10 @@
 <?php
 
-namespace Codedor\FormArchitect\Tests\Fixtures\Database\Factories;
+namespace Wotz\FormArchitect\Tests\Fixtures\Database\Factories;
 
-use Codedor\FormArchitect\Tests\Fixtures\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Wotz\FormArchitect\Tests\Fixtures\Models\User;
 
 class UserFactory extends Factory
 {

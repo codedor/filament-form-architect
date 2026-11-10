@@ -1,9 +1,9 @@
 <?php
 
-namespace Codedor\FormArchitect\Filament\Resources\Pages;
+namespace Wotz\FormArchitect\Filament\Resources\Pages;
 
-use Codedor\FormArchitect\Filament\Resources\FormSubmissionResource;
 use Filament\Resources\Pages\ListRecords;
+use Wotz\FormArchitect\Filament\Resources\FormSubmissionResource;
 
 class ViewForm extends ListRecords
 {

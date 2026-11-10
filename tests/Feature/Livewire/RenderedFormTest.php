@@ -1,12 +1,12 @@
 <?php
 
-use Codedor\FormArchitect\Filament\Resources\FormResource;
-use Codedor\FormArchitect\Livewire\RenderedForm;
-use Codedor\FormArchitect\Mail\SendFormSubmission;
-use Codedor\FormArchitect\Models\Form;
-use Codedor\FormArchitect\Models\FormSubmission;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Wotz\FormArchitect\Filament\Resources\FormResource;
+use Wotz\FormArchitect\Livewire\RenderedForm;
+use Wotz\FormArchitect\Mail\SendFormSubmission;
+use Wotz\FormArchitect\Models\Form;
+use Wotz\FormArchitect\Models\FormSubmission;
 
 use function Pest\Livewire\livewire;
 

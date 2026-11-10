@@ -1,7 +1,7 @@
 <div>
-    @if ($formModel->allowSubmissions())
+    @if ($formModel?->allowSubmissions())
         @include('livewire-forms::form')
     @else
-        {!! $formModel->getMaxSubmissionMessage() !!}
+        {!! $formModel?->getMaxSubmissionMessage() !!}
     @endif
 </div>
