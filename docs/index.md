@@ -101,6 +101,7 @@ return [
         Architect\RadioButtonBlock::class => [],
         Architect\FileInputBlock::class => [],
         Architect\CheckboxBlock::class => [],
+        Architect\SpacerBlock::class => [],
     ],
     'checkbox-tiptap-profile' => 'minimal',
 ];

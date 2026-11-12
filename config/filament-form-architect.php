@@ -14,6 +14,7 @@ return [
         Architect\FileInputBlock::class => [],
         Architect\RadioButtonBlock::class => [],
         Architect\SelectInputBlock::class => [],
+        Architect\SpacerBlock::class => [],
         Architect\TextareaBlock::class => [],
         Architect\TextInputBlock::class => [],
         Architect\TitleBlock::class => [],
